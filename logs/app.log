@@ -1,0 +1,1 @@
+2026-09-15 23:56:08.562 | INFO     | app.services.learning_service:_train:607 - Training skipped: 0 samples, 0 classes (need >=20 samples and >=2 classes)
