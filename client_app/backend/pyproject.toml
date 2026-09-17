@@ -1,0 +1,28 @@
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+src = ["app", "ml", "tests"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "S", "B", "A", "C4", "PT", "RUF"]
+ignore = ["E501", "S101", "S105", "S106", "S311", "S110", "S603", "S607", "B008", "B017", "B904", "B905", "PT011", "N812", "RUF012", "RUF013", "C401", "C416", "F601"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S105", "S106", "B017", "PT011", "F401"]
+"scripts/*" = ["S603", "S607"]
+"**/scripts/*" = ["S603", "S607"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app", "ml"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = false
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+disable_error_code = ["no-any-return", "var-annotated", "attr-defined", "misc", "union-attr"]

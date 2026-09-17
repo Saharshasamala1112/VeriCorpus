@@ -23,12 +23,6 @@ services:
         sync: false
       - key: FORENSIC_ENABLED
         value: "false"
-      - key: CORPUS_BASE_URL
-        value: "https://api.corpus.swecha.org"
-      - key: CORPUS_PHONE
-        sync: false
-      - key: CORPUS_PASSWORD
-        sync: false
 
   - type: web
     name: vericorpus-frontend

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged (frontend)
+cd frontend && npx lint-staged
+
+# Run backend linting and formatting
+cd ../backend
+.venv/bin/python -m ruff check --fix .
+.venv/bin/python -m ruff format .

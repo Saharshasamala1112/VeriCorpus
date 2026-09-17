@@ -1,0 +1,11 @@
+*.sqlite3
+logs/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+outputs/
+uploads/
+data/
+deepshield/

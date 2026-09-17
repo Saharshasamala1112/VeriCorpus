@@ -1,0 +1,6 @@
+export { default as TextHighlightVisual } from './TextHighlightVisual'
+export { default as ImageVisualization } from './ImageVisualization'
+export { default as AudioVisualization } from './AudioVisualization'
+export { default as VideoVisualization } from './VideoVisualization'
+export { default as DocumentVisualization } from './DocumentVisualization'
+export { default as AccessibleAlternatives } from './AccessibleAlternatives'

@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+echo "Running pre-push checks..."
+
+# Backend checks
+echo "==> Backend: ruff check..."
+cd backend && .venv/bin/python -m ruff check . || exit 1
+
+echo "==> Backend: ruff format check..."
+cd ../backend && .venv/bin/python -m ruff format --check . || exit 1
+
+echo "==> Backend: mypy..."
+cd ../backend && .venv/bin/python -m mypy app/ --ignore-missing-imports || exit 1
+
+# Frontend checks
+echo "==> Frontend: lint..."
+cd ../frontend && npx oxlint src/ || exit 1
+
+echo "==> Frontend: format check..."
+cd ../frontend && npx prettier --check src/ || exit 1
+
+echo "==> Frontend: typecheck..."
+cd ../frontend && npx tsc --noEmit || exit 1
+
+echo "==> Frontend: tests..."
+cd ../frontend && npx vitest run || exit 1
+
+echo "✅ All pre-push checks passed!"

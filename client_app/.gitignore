@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Build output
+dist/
+build/
+coverage/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Uploads & Reports (user data)
+backend/uploads/
+backend/reports/
+backend/logs/
+backend/vector_db/
+backend/checkpoints/
+backend/data/
+backend/ml/data/huggingface_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pre-commit
+.pre-commit-cache/

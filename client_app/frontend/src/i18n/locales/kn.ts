@@ -1,0 +1,113 @@
+/**
+ * Kannada UI strings for the VeriCorpus AI platform.
+ */
+
+import type { UIStrings } from './en'
+
+const kn: UIStrings = {
+  nav: {
+    home: 'ಮುಖಪುಟ',
+    upload: 'ಅಪ್ಲೋಡ್',
+    results: 'ಫಲಿತಾಂಗಳು',
+    settings: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು',
+    history: 'ಇತಿಹಾಸ',
+    admin: 'ನಿರ್ವಹಣೆ',
+  },
+  upload: {
+    title: 'ವಿಶ್ಲೇಷಣೆಗಾಗಿ ಮಾಧ್ಯಮವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ',
+    dragDrop: 'ಫೈಲ್‌ಗಳನ್ನು ಇಲ್ಲಿ ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಟ್ಟುಬಿಡಿ, ಅಥವಾ ಬ್ರೌಸ್ ಮಾಡಲು ಕ್ಲಿಕ್ ಮಾಡಿ',
+    supportedFormats: 'ಬೆಂಬಲಿತ ಸ್ವರೂಪಗಳು',
+    analyze: 'ವಿಶ್ಲೇಷಿಸಿ',
+    analyzing: 'ವಿಶ್ಲೇಷಿಸಲಾಗುತ್ತಿದೆ...',
+    uploadSuccess: 'ಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ಅಪ್ಲೋಡ್ ಆಗಿದೆ',
+    uploadError: 'ಅಪ್ಲೋಡ್ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
+    fileTooLarge: 'ಫೈಲ್ ಗಾತ್ರ ಗರಿಷ್ಠ ಮಿತಿಯನ್ನು ಮೀರಿದೆ',
+    unsupportedFormat: 'ಫೈಲ್ ಸ್ವರೂಪ ಬೆಂಬಲಿತವಾಗಿಲ್ಲ',
+    noFileSelected: 'ಫೈಲ್ ಆಯ್ಕೆಮಾಡಲಾಗಿಲ್ಲ',
+  },
+  results: {
+    title: 'ವಿಶ್ಲೇಷಣೆ ಫಲಿತಾಂಗಳು',
+    verdict: 'ತೀರ್ಪು',
+    confidence: 'ವಿಶ್ವಾಸ',
+    aiProbability: 'AI-ಉತ್ಪಾದಿತ ಸಂಭಾವ್ಯತೆ',
+    humanCreated: 'ಮಾನವ ನಿರ್ಮಿತ',
+    aiGenerated: 'AI-ಉತ್ಪಾದಿತ',
+    inconclusive: 'ನಿರ್ಣಾಯಕವಲ್ಲ',
+    loading: 'ಫಲಿತಾಂಗಳು ಲೋಡ್ ಆಗುತ್ತಿವೆ...',
+    noResults: 'ಫಲಿತಾಂಗಳು ಲಭ್ಯವಿಲ್ಲ',
+    exportResults: 'ಫಲಿತಾಂಗಳನ್ನು ರಫ್ತು ಮಾಡಿ',
+    shareResults: 'ಫಲಿತಾಂಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ',
+    viewExplanation: 'ವಿವರಣೆಯನ್ನು ನೋಡಿ',
+    hideExplanation: 'ವಿವರಣೆಯನ್ನು ಮರೆಮಾಡಿ',
+  },
+  verdict: {
+    likelyManipulated: 'AI-ಉತ್ಪಾದಿತ / ಬದಲಾಯಿಸಲಾಗಿದೆ',
+    likelyAuthentic: 'ಮಾನವ ನಿರ್ಮಿತ',
+    inconclusive: 'ನಿರ್ಣಾಯಕವಲ್ಲ',
+  },
+  confidence: {
+    veryHigh: 'ತುಂಬಾ ಹೆಚ್ಚು',
+    high: 'ಹೆಚ್ಚು',
+    moderate: 'ಮಧ್ಯಮ',
+    low: 'ಕಡಿಮೆ',
+    veryLow: 'ತುಂಬಾ ಕಡಿಮೆ',
+  },
+  settings: {
+    title: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು',
+    language: 'ಭಾಷೆ',
+    analysisLanguage: 'ವಿಶ್ಲೇಷಣೆ ಭಾಷೆ',
+    explanationLanguage: 'ವಿವರಣೆ ಭಾಷೆ',
+    analysisLanguageDescription: 'ಪಠ್ಯ ವಿಶ್ಲೇಷಣೆಗೆ ಬಳಸುವ ಭಾಷೆ (ಪತ್ತೆ ನಿಖರತೆಯನ್ನು ಪ್ರಭಾವಿಸುತ್ತದೆ)',
+    explanationLanguageDescription: 'UI ಲೇಬಲ್‌ಗಳು ಮತ್ತು ಫಲಿತಾಂಗ ವಿವರಣೆಗಳಿಗೆ ಭಾಷೆ',
+    theme: 'ಥೀಮ್',
+    darkMode: 'ಡಾರ್ಕ್ ಮೋಡ್',
+    lightMode: 'ಲೈಟ್ ಮೋಡ್',
+    save: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಉಳಿಸಿ',
+    saved: 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು ಉಳಿಸಲಾಗಿದೆ',
+  },
+  common: {
+    loading: 'ಲೋಡ್ ಆಗುತ್ತಿದೆ...',
+    error: 'ದೋಷ',
+    retry: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ',
+    cancel: 'ರದ್ದುಮಾಡಿ',
+    confirm: 'ದೃಢೀಕರಿಸಿ',
+    delete: 'ಅಳಿಸಿ',
+    edit: 'ಸಂಪಾದಿಸಿ',
+    save: 'ಉಳಿಸಿ',
+    close: 'ಮುಚ್ಚಿ',
+    back: 'ಹಿಂದೆ',
+    next: 'ಮುಂದೆ',
+    search: 'ಹುಡುಕಿ',
+    noData: 'ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ',
+    success: 'ಯಶಸ್ಸು',
+    warning: 'ಎಚ್ಚರಿಕೆ',
+    info: 'ಮಾಹಿತಿ',
+  },
+  mediaType: {
+    text: 'ಪಠ್ಯ',
+    image: 'ಚಿತ್ರ',
+    audio: 'ಆಡಿಯೋ',
+    video: 'ವೀಡಿಯೊ',
+    document: 'ಡಾಕ್ಯುಮೆಂಟ್',
+  },
+  errors: {
+    networkError: 'ನೆಟ್‌ವರ್ಕ್ ದೋಷ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ.',
+    serverError: 'ಸರ್ವರ್ ದೋಷ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
+    notFound: 'ಸಂಪನ್ಮೂಲ ಕಂಡುಬಂದಿಲ್ಲ.',
+    unauthorized: 'ಅಧಿಕೃತವಲ್ಲ. ದಯವಿಟ್ಟು ಲಾಗ್ ಇನ್ ಮಾಡಿ.',
+    forbidden: 'ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ.',
+    validationError: 'ಮಾನ್ಯತೆ ದೋಷ.',
+    unknownError: 'ಅನಿರೀಕ್ಷಿತ ದೋಷ ಸಂಭವಿಸಿದೆ.',
+  },
+  languageCapability: {
+    reducedAccuracy: 'ಈ ಭಾಷೆಗೆ ಪತ್ತೆ ನಿಖರತೆ ಕಡಿಮೆ ಮಾಡಲಾಗಿದೆ.',
+    modelNotTrained: 'AI ಪತ್ತೆ ಮಾದರಿ ಈ ಭಾಷೆಗೆ ಸಂಪೂರ್ಣವಾಗಿ ತರಬೇತಿ ಪಡೆದಿಲ್ಲ.',
+    usingStylometricOnly: 'ಕೇವಲ ಸ್ಟೈಲೋಮೆಟ್ರಿಕ್ ವೈಶಿಷ್ಟ್ಯಗಳನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ.',
+  },
+  footer: {
+    copyright: 'VeriCorpus AI',
+    tagline: 'ಭಾಷೆಗಳಲ್ಲಿ ಡಿಜಿಟಲ್ ಪ್ರಾಮಾಣಿಕತೆಯನ್ನು ಖಾತ್ರಿಪಡಿಸುವುದು',
+  },
+}
+
+export default kn
