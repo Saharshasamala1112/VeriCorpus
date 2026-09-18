@@ -71,7 +71,7 @@ export default function VideoResultPage() {
     setHoveredSegment,
     setHoveredFrame,
     setActiveTab: _setActiveTab,
-    setEvidenceFilter,
+    setEvidenceFilter: _setEvidenceFilter,
     resetState,
   } = useVideoResultStore()
 
@@ -115,15 +115,15 @@ export default function VideoResultPage() {
     [setHoveredSegment],
   )
 
-  const handleFrameClick = useCallback((frameId: string) => selectFrame(frameId), [selectFrame])
+  const _handleFrameClick = useCallback((_frameId: string) => selectFrame(_frameId), [selectFrame])
 
-  const handleFrameHover = useCallback(
-    (frameId: string | null) => setHoveredFrame(frameId),
+  const _handleFrameHover = useCallback(
+    (_frameId: string | null) => setHoveredFrame(_frameId),
     [setHoveredFrame],
   )
 
-  const handleSignalTypeClick = useCallback(
-    (type: string) => selectSignalType(type === selectedSignalType ? null : type),
+  const _handleSignalTypeClick = useCallback(
+    (_type: string) => selectSignalType(_type === selectedSignalType ? null : _type),
     [selectSignalType, selectedSignalType],
   )
 

@@ -4,9 +4,9 @@ from datetime import datetime, UTC
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.config import settings
 from app.core.database import get_db
 from app.core.security import create_access_token, get_current_user
 from app.models.user import User, UserRole
@@ -25,7 +25,6 @@ from app.schemas.auth import (
     UserUpdateRequest,
 )
 from app.schemas.common import SuccessResponse
-from app.services import auth_service
 from app.services.audit_service import log_audit
 from app.services.corpus_service import CorpusService
 
@@ -36,32 +35,66 @@ corpus_service = CorpusService()
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
 async def register(data: RegisterRequest, request: Request, db: AsyncSession = Depends(get_db)):
-    result = await auth_service.register_user(db, data)
-    await log_audit(
-        db,
-        result.user_id,
-        "register",
-        "user",
-        result.user_id,
-        ip_address=request.client.host if request.client else None,
-        user_agent=request.headers.get("user-agent"),
+    """Register not available — use Corpus credentials to log in."""
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Direct registration is disabled. Please log in with your Corpus account credentials.",
     )
-    return result
 
 
 @router.post("/login", response_model=TokenResponse)
 async def login(data: LoginRequest, request: Request, db: AsyncSession = Depends(get_db)):
-    result = await auth_service.authenticate_user(db, data)
+    """Authenticate against the Swecha Corpus API, then issue a local JWT."""
+    from app.core.security import hash_password
+
+    # 1. Verify credentials against the Corpus API
+    corpus_result = await corpus_service.login_with_credentials(data.phone, data.password)
+    corpus_token = corpus_result.get("access_token", "")
+
+    # 2. Find or create local user
+    result = await db.execute(select(User).where(User.phone == data.phone))
+    user = result.scalar_one_or_none()
+
+    if user is None:
+        # Auto-create a local user from Corpus credentials
+        user = User(
+            phone=data.phone,
+            username=data.phone,
+            password_hash=hash_password(data.password),
+            role=UserRole.USER,
+            is_active=True,
+            corpus_token=corpus_token,
+            corpus_phone=data.phone,
+        )
+        db.add(user)
+        await db.flush()
+    else:
+        # Update Corpus token on existing user
+        user.corpus_token = corpus_token
+        user.corpus_phone = data.phone
+
+    user.last_login_at = datetime.now(UTC)
+    await db.commit()
+    await db.refresh(user)
+
     await log_audit(
         db,
-        result.user_id,
-        "login",
+        user.id,
+        "corpus_login",
         "user",
-        result.user_id,
+        user.id,
         ip_address=request.client.host if request.client else None,
         user_agent=request.headers.get("user-agent"),
     )
-    return result
+
+    token = create_access_token(user.id)
+    return TokenResponse(
+        access_token=token,
+        user_id=user.id,
+        username=user.username,
+        phone=user.phone,
+        roles=[user.role.value],
+    )
 
 
 @router.post("/logout", status_code=status.HTTP_200_OK)

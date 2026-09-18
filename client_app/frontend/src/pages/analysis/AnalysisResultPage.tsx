@@ -1,6 +1,6 @@
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { useMemo, useState, lazy, Suspense } from 'react'
-import { ArrowLeft, Share2, Eye, EyeOff } from 'lucide-react'
+import { ArrowLeft, Share2, Eye, EyeOff, ChevronDown as ChevronDownIcon } from 'lucide-react'
 import HeroResult from '../../components/analysis/HeroResult'
 import ExplainabilitySection from '../../components/analysis/ExplainabilitySection'
 import LanguageSelector from '../../components/analysis/LanguageSelector'
@@ -64,6 +64,9 @@ function mapResult(result: AuthenticityResult): AnalysisResultData {
       confidence: result.confidence,
       keySignal: signal.value,
       description: signal.detail,
+      modelProbability: result.model_probability ?? result.manipulation_probability,
+      calibratedConfidence: result.calibrated_probability ?? result.confidence,
+      evidenceStrength: result.evidence_strength ?? null,
     })),
     evidenceEntries: (result.plagiarism_matches ?? []).map((match, index) => ({
       id: `${result.sample_id}-match-${index}`,
@@ -132,7 +135,7 @@ function Section({ title, icon, badge, defaultOpen = false, children }: SectionP
           <h2 className="text-sm font-semibold text-white">{title}</h2>
           {badge}
         </div>
-        <ChevronDown
+        <ChevronDownIcon
           className={`h-4 w-4 shrink-0 text-slate-500 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`}
@@ -181,7 +184,7 @@ const VideoResultPage = lazy(() => import('./VideoResultPage'))
 export default function AnalysisResultPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { id } = useParams<{ id: string }>()
+  const { id: _id } = useParams<{ id: string }>()
   const { language, setLanguage } = useLanguageStore()
   const { template } = useMemo(() => createLocalizedExplanation(language), [language])
   const liveResult = (location.state as { result?: AuthenticityResult } | null)?.result

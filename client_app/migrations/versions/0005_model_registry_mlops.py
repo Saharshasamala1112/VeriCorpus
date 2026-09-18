@@ -11,9 +11,26 @@ branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 
 
+def _table_exists(table_name: str) -> bool:
+    inspector = sa.inspect(op.get_bind())
+    return table_name in inspector.get_table_names()
+
+
+def _create_table_if_needed(table_name: str, *args, **kwargs) -> None:
+    if not _table_exists(table_name):
+        op.create_table(table_name, *args, **kwargs)
+
+
+def _create_index_if_needed(index_name: str, table_name: str, columns: list) -> None:
+    inspector = sa.inspect(op.get_bind())
+    existing = {idx["name"] for idx in inspector.get_indexes(table_name)}
+    if index_name not in existing:
+        op.create_index(index_name, table_name, columns)
+
+
 def upgrade() -> None:
     # ─── Model Version Aliases ──────────────────────────────────────────────
-    op.create_table(
+    _create_table_if_needed(
         "model_version_aliases",
         sa.Column("id", sa.String(36), primary_key=True),
         sa.Column("model_id", sa.String(36), sa.ForeignKey("models.id"), nullable=False),
@@ -25,11 +42,11 @@ def upgrade() -> None:
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
         sa.UniqueConstraint("model_id", "alias", name="uq_model_alias"),
     )
-    op.create_index("idx_mva_model", "model_version_aliases", ["model_id"])
-    op.create_index("idx_mva_alias", "model_version_aliases", ["alias"])
+    _create_index_if_needed("idx_mva_model", "model_version_aliases", ["model_id"])
+    _create_index_if_needed("idx_mva_alias", "model_version_aliases", ["alias"])
 
     # ─── Model Version Extended Metadata ────────────────────────────────────
-    op.create_table(
+    _create_table_if_needed(
         "model_version_metadata",
         sa.Column("id", sa.String(36), primary_key=True),
         sa.Column(
@@ -62,10 +79,10 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
     )
-    op.create_index("idx_mvm_version", "model_version_metadata", ["model_version_id"])
+    _create_index_if_needed("idx_mvm_version", "model_version_metadata", ["model_version_id"])
 
     # ─── Model Comparisons ──────────────────────────────────────────────────
-    op.create_table(
+    _create_table_if_needed(
         "model_comparisons",
         sa.Column("id", sa.String(36), primary_key=True),
         sa.Column(
@@ -94,10 +111,10 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
     )
-    op.create_index("idx_mc_candidate", "model_comparisons", ["candidate_version_id"])
+    _create_index_if_needed("idx_mc_candidate", "model_comparisons", ["candidate_version_id"])
 
     # ─── Model Lineage Edges ────────────────────────────────────────────────
-    op.create_table(
+    _create_table_if_needed(
         "model_lineage_edges",
         sa.Column("id", sa.String(36), primary_key=True),
         sa.Column("model_id", sa.String(36), sa.ForeignKey("models.id"), nullable=False),
@@ -119,11 +136,11 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
     )
-    op.create_index("idx_mle_from", "model_lineage_edges", ["from_version_id"])
-    op.create_index("idx_mle_to", "model_lineage_edges", ["to_version_id"])
+    _create_index_if_needed("idx_mle_from", "model_lineage_edges", ["from_version_id"])
+    _create_index_if_needed("idx_mle_to", "model_lineage_edges", ["to_version_id"])
 
     # ─── Production Inference Records ───────────────────────────────────────
-    op.create_table(
+    _create_table_if_needed(
         "production_inference_records",
         sa.Column("id", sa.String(36), primary_key=True),
         sa.Column("request_id", sa.String(100), nullable=False),
@@ -143,8 +160,8 @@ def upgrade() -> None:
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
     )
-    op.create_index("idx_pir_model_version", "production_inference_records", ["model_version_id"])
-    op.create_index("idx_pir_request_id", "production_inference_records", ["request_id"])
+    _create_index_if_needed("idx_pir_model_version", "production_inference_records", ["model_version_id"])
+    _create_index_if_needed("idx_pir_request_id", "production_inference_records", ["request_id"])
 
 
 def downgrade() -> None:

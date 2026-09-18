@@ -222,7 +222,7 @@ function mapJob(raw: RawJob): TrainingJob {
           parentModelVersion: raw.base_model_version,
         }
       : null,
-    error: raw.error_message || undefined,
+    error: raw.error_message ?? null,
     createdAt: raw.created_at,
     updatedAt: raw.updated_at,
     completedAt: raw.completed_at,
@@ -268,7 +268,7 @@ function mapCandidate(raw: RawCandidate): ModelCandidate {
     version: raw.version,
     parentVersion: raw.parent_version,
     status: raw.status as ModelCandidate['status'],
-    evaluationRunId: raw.evaluation_run_id,
+    evaluationRunId: raw.evaluation_run_id ?? '',
     evaluationRun: null,
     comparison: null,
     rejectionReason: raw.rejection_reason,

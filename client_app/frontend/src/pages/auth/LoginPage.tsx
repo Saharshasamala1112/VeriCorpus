@@ -23,7 +23,6 @@ export default function LoginPage() {
     const errs: typeof errors = {}
     if (!phone.trim()) errs.phone = 'Phone number is required'
     if (!password) errs.password = 'Password is required'
-    else if (password.length < 6) errs.password = 'Password must be at least 6 characters'
     setErrors(errs)
     return Object.keys(errs).length === 0
   }
@@ -44,7 +43,7 @@ export default function LoginPage() {
       navigate(from, { replace: true })
     } catch (err) {
       setErrors({
-        general: err instanceof Error ? err.message : 'Invalid credentials. Please try again.',
+        general: err instanceof Error ? err.message : 'Invalid Corpus credentials. Please try again.',
       })
     } finally {
       setLoading(false)
@@ -65,7 +64,7 @@ export default function LoginPage() {
             <Shield className="h-7 w-7 text-cyan-400" />
           </div>
           <h1 className="text-xl font-bold text-white">VeriCorpus AI</h1>
-          <p className="mt-1.5 text-sm text-slate-500">Multimodal content authenticity platform</p>
+          <p className="mt-1.5 text-sm text-slate-500">Sign in with your Corpus account</p>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" aria-label="Sign in form">
@@ -79,8 +78,8 @@ export default function LoginPage() {
           )}
 
           <Input
-            label="Phone number"
-            placeholder="Enter your phone number"
+            label="Corpus phone number"
+            placeholder="Enter your Corpus phone number"
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value)
@@ -120,7 +119,7 @@ export default function LoginPage() {
         </form>
 
         <p className="mt-8 text-center text-[11px] text-slate-600">
-          Secure access to VeriCorpus AI platform
+          Only users with a Corpus account can access this platform
         </p>
       </div>
     </div>

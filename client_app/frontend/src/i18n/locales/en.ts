@@ -3,7 +3,7 @@
  * Used for analysis language-independent labels and messages.
  */
 
-type UIStrings = {
+export type UIStrings = {
   nav: {
     home: string
     upload: string
