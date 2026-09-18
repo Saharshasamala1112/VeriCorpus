@@ -3,6 +3,7 @@
   "outputDirectory": "dist",
   "installCommand": "npm ci",
   "framework": "vite",
+  "rootDirectory": "client_app/frontend",
   "rewrites": [
     {
       "source": "/(.*)",
