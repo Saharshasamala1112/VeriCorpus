@@ -5,6 +5,7 @@ import type {
   AffectedRegion,
   AffectedSegment,
   BoundingBox,
+  DocumentContent,
 } from '../types'
 import { LOCALIZATION_UNAVAILABLE } from '../types'
 

@@ -1,5 +1,4 @@
 import type {
-  ITextExplainer,
   ExplanationObject,
   ExplanationSignalObject,
   EvidenceObject,
@@ -9,7 +8,7 @@ import { LocalizationProvider } from '../providers/LocalizationProvider'
 
 // ─── Text Explainer ──────────────────────────────────────────────────────────
 
-export class TextExplainer implements ITextExplainer {
+export class TextExplainer {
   private readonly builder: ExplanationBuilder
   private readonly localization: LocalizationProvider
 
@@ -59,6 +58,8 @@ export class TextExplainer implements ITextExplainer {
           score: this.normalizeBurstiness(linguistic.burstiness),
           explanation: this.explainBurstiness(linguistic.burstiness),
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -70,6 +71,8 @@ export class TextExplainer implements ITextExplainer {
           score: this.normalizePerplexity(linguistic.perplexity),
           explanation: this.explainPerplexity(linguistic.perplexity),
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -81,6 +84,8 @@ export class TextExplainer implements ITextExplainer {
           score: linguistic.hedging_ratio,
           explanation: `Text contains hedging language at ${(linguistic.hedging_ratio * 100).toFixed(1)}% rate`,
           signal_type: 'pattern',
+          direction: 'neutral',
+          severity: 'low',
           affected_region_ids: [],
         })
       }
@@ -92,6 +97,8 @@ export class TextExplainer implements ITextExplainer {
           score: linguistic.human_markers_ratio,
           explanation: `Human expression markers detected at ${(linguistic.human_markers_ratio * 100).toFixed(1)}% rate`,
           signal_type: 'authenticity_indicator',
+          direction: 'counter',
+          severity: 'info',
           affected_region_ids: [],
         })
       }
@@ -108,6 +115,8 @@ export class TextExplainer implements ITextExplainer {
           score: provenance.extraction_confidence,
           explanation: `Text extraction confidence: ${(provenance.extraction_confidence * 100).toFixed(1)}%`,
           signal_type: 'provenance',
+          direction: 'neutral',
+          severity: 'info',
           affected_region_ids: [],
         })
       }
@@ -125,6 +134,8 @@ export class TextExplainer implements ITextExplainer {
           explanation: `Semantic consistency score: ${(consistency.semantic_consistency * 100).toFixed(1)}%`,
           signal_type:
             consistency.semantic_consistency < 0.5 ? 'manipulation' : 'authenticity_indicator',
+          direction: consistency.semantic_consistency < 0.5 ? 'supporting' : 'counter',
+          severity: consistency.semantic_consistency < 0.5 ? 'medium' : 'info',
           affected_region_ids: [],
         })
       }
@@ -141,6 +152,8 @@ export class TextExplainer implements ITextExplainer {
           score: generated.ai_probability,
           explanation: `Probability of AI generation: ${(generated.ai_probability * 100).toFixed(1)}%`,
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: generated.ai_probability > 0.7 ? 'high' : 'medium',
           affected_region_ids: [],
         })
       }

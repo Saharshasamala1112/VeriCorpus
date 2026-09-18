@@ -12,6 +12,7 @@ import type {
   TextHighlightData,
   TextHighlight,
   VisualizationMetadata,
+  SignalType,
 } from '../types'
 
 // ─── Evidence Visualizer ─────────────────────────────────────────────────────
@@ -463,7 +464,7 @@ export class EvidenceVisualizer implements IEvidenceVisualizer {
 
   // ── Helper Methods ─────────────────────────────────────────────────────────
 
-  private inferSignalType(evidence: EvidenceObject): string {
+  private inferSignalType(evidence: EvidenceObject): SignalType {
     const content = evidence.content.toLowerCase()
     const description = evidence.description.toLowerCase()
 
@@ -476,7 +477,7 @@ export class EvidenceVisualizer implements IEvidenceVisualizer {
     return 'manipulation'
   }
 
-  private getSignalColor(signalType: string): string {
+  private getSignalColor(signalType: SignalType): string {
     const colors: Record<string, string> = {
       ai_generation: '#ef4444',
       manipulation: '#f97316',

@@ -1,7 +1,5 @@
 import type {
-  IVideoExplainer,
   ExplanationObject,
-  VideoAnalysisResult,
   ExplanationSignalObject,
   EvidenceObject,
 } from '../types'
@@ -11,7 +9,7 @@ import { EvidenceVisualizer } from '../providers/EvidenceVisualizer'
 
 // ─── Video Explainer ─────────────────────────────────────────────────────────
 
-export class VideoExplainer implements IVideoExplainer {
+export class VideoExplainer {
   private readonly builder: ExplanationBuilder
   private readonly localization: LocalizationProvider
   private readonly visualizer: EvidenceVisualizer
@@ -63,6 +61,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: frame.severity || 0.5,
           explanation: this.explainFrameArtifacts(frame),
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: [],
         })
       }
@@ -79,6 +79,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: temporal.inconsistency_score || 0.6,
           explanation: `Found ${temporal.motion_inconsistencies.length} motion inconsistency(ies) across frames`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -90,6 +92,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: 0.5,
           explanation: `Detected ${temporal.fps_anomalies.length} frame rate anomaly(ies)`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'low',
           affected_region_ids: [],
         })
       }
@@ -106,6 +110,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: scene.cut_anomaly_score || 0.5,
           explanation: `Detected ${scene.inconsistent_cuts.length} inconsistent scene cut(s)`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -117,6 +123,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: 0.6,
           explanation: `Found ${scene.lighting_inconsistencies.length} lighting inconsistency(ies) between scenes`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -133,6 +141,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: sync.severity || 0.5,
           explanation: `Audio-visual desynchronization detected (severity: ${(sync.severity || 0.5) * 100}%)`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -149,6 +159,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: facial.severity || 0.6,
           explanation: `Found ${facial.inconsistencies.length} facial inconsistency(ies) across frames`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: [],
         })
       }
@@ -160,6 +172,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: 0.5,
           explanation: 'Detected unnatural blinking patterns',
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -176,6 +190,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: deepfake.confidence || 0.7,
           explanation: this.explainDeepfakeIndicators(deepfake),
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: deepfake.confidence && deepfake.confidence > 0.8 ? 'high' : 'medium',
           affected_region_ids: [],
         })
       }
@@ -192,6 +208,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: 0.8,
           explanation: `Detected signatures of deepfake tools: ${metadata.deepfake_tools.join(', ')}`,
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: [],
         })
       }
@@ -203,6 +221,8 @@ export class VideoExplainer implements IVideoExplainer {
           score: 0.5,
           explanation: `Found ${metadata.inconsistencies.length} metadata inconsistency(ies)`,
           signal_type: 'metadata_anomaly',
+          direction: 'supporting',
+          severity: 'low',
           affected_region_ids: [],
         })
       }
@@ -215,7 +235,7 @@ export class VideoExplainer implements IVideoExplainer {
     artifacts_detected: boolean
     severity?: number
     artifact_types?: string[]
-    affected_frames?: number[]
+    affected_frames?: Array<{ frame_number: number; severity?: number; description?: string }>
   }): string {
     const types = frame.artifact_types || ['unknown']
     const severity = frame.severity || 0.5

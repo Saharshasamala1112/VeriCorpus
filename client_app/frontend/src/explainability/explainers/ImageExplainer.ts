@@ -1,5 +1,4 @@
 import type {
-  IImageExplainer,
   ExplanationObject,
   ExplanationSignalObject,
   EvidenceObject,
@@ -12,7 +11,7 @@ import { AttributionProvider } from '../providers/AttributionProvider'
 
 // ─── Image Explainer ─────────────────────────────────────────────────────────
 
-export class ImageExplainer implements IImageExplainer {
+export class ImageExplainer {
   private readonly builder: ExplanationBuilder
   private readonly localization: LocalizationProvider
   private readonly attribution: AttributionProvider
@@ -50,7 +49,7 @@ export class ImageExplainer implements IImageExplainer {
     }
 
     // Build explanation
-    const explanation = await this.builder.buildExplanation(
+    return this.builder.buildExplanation(
       signals,
       evidence,
       regions,
@@ -59,14 +58,6 @@ export class ImageExplainer implements IImageExplainer {
       analysisResult.verdict || 'UNCERTAIN',
       analysisResult.confidence || 0.5,
     )
-
-    // Add attribution data if available
-    if (attributionResult) {
-      explanation.attribution.method = attributionResult.method
-      explanation.attribution.heatmap = attributionResult.heatmap
-    }
-
-    return explanation
   }
 
   // ── Signal Extraction ──────────────────────────────────────────────────────
@@ -85,6 +76,8 @@ export class ImageExplainer implements IImageExplainer {
           score: artifacts.severity || 0.5,
           explanation: this.explainVisualArtifacts(artifacts),
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: artifacts.affected_regions?.map((r) => r.id) || [],
         })
       }
@@ -102,6 +95,8 @@ export class ImageExplainer implements IImageExplainer {
           explanation:
             'Image shows signs of double compression, which may indicate re-saving after manipulation',
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -113,6 +108,8 @@ export class ImageExplainer implements IImageExplainer {
           score: compression.anomaly_score,
           explanation: `Compression pattern anomaly detected (score: ${(compression.anomaly_score * 100).toFixed(1)}%)`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -129,6 +126,8 @@ export class ImageExplainer implements IImageExplainer {
           score: metadata.generator_confidence || 0.8,
           explanation: `Metadata indicates AI generator: ${metadata.generator_name || 'unknown'}`,
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: [],
         })
       }
@@ -140,6 +139,8 @@ export class ImageExplainer implements IImageExplainer {
           score: 0.6,
           explanation: `Found ${metadata.inconsistencies.length} metadata inconsistency(ies)`,
           signal_type: 'metadata_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -156,6 +157,8 @@ export class ImageExplainer implements IImageExplainer {
           score: freq.confidence || 0.5,
           explanation: this.explainFrequencyAnomaly(freq),
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -173,6 +176,8 @@ export class ImageExplainer implements IImageExplainer {
             score: modelSignal.confidence,
             explanation: `${modelSignal.model_name} patterns detected with ${(modelSignal.confidence * 100).toFixed(1)}% confidence`,
             signal_type: 'ai_generation',
+            direction: 'supporting',
+            severity: modelSignal.confidence > 0.8 ? 'high' : 'medium',
             affected_region_ids: [],
           })
         }

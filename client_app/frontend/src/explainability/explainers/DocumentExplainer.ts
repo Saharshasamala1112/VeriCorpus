@@ -1,15 +1,15 @@
 import type {
-  IDocumentExplainer,
   ExplanationObject,
   ExplanationSignalObject,
   EvidenceObject,
 } from '../types'
 import { ExplanationBuilder } from '../providers/ExplanationBuilder'
 import { LocalizationProvider } from '../providers/LocalizationProvider'
+import { EvidenceVisualizer } from '../providers/EvidenceVisualizer'
 
 // ─── Document Explainer ──────────────────────────────────────────────────────
 
-export class DocumentExplainer implements IDocumentExplainer {
+export class DocumentExplainer {
   private readonly builder: ExplanationBuilder
   private readonly localization: LocalizationProvider
   private readonly visualizer: EvidenceVisualizer
@@ -65,6 +65,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: metadata.generator_confidence || 0.8,
           explanation: `Document metadata indicates AI generator: ${metadata.generator_name || 'unknown'}`,
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: [],
         })
       }
@@ -76,6 +78,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: 0.6,
           explanation: `Found ${metadata.inconsistencies.length} metadata inconsistency(ies)`,
           signal_type: 'metadata_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -87,6 +91,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: 0.3,
           explanation: `Document was created with: ${metadata.creation_software}`,
           signal_type: 'provenance',
+          direction: 'neutral',
+          severity: 'info',
           affected_region_ids: [],
         })
       }
@@ -103,6 +109,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: structural.severity || 0.5,
           explanation: this.explainStructuralAnomalies(structural),
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: structural.severity && structural.severity > 0.7 ? 'high' : 'medium',
           affected_region_ids: [],
         })
       }
@@ -119,6 +127,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: 0.5,
           explanation: `Found ${text.font_inconsistencies.length} font inconsistency(ies)`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -130,6 +140,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: 0.4,
           explanation: `Detected ${text.spacing_anomalies.length} spacing anomaly(ies)`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'low',
           affected_region_ids: [],
         })
       }
@@ -141,6 +153,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: 0.5,
           explanation: `Found ${text.style_inconsistencies.length} style inconsistency(ies)`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -157,6 +171,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: 1 - ocr.quality_score,
           explanation: `OCR quality score: ${(ocr.quality_score * 100).toFixed(1)}%`,
           signal_type: 'artifact',
+          direction: 'supporting',
+          severity: 'low',
           affected_region_ids: [],
         })
       }
@@ -168,6 +184,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: ocr.text_image_mismatch,
           explanation: `Text and image content mismatch detected (${(ocr.text_image_mismatch * 100).toFixed(1)}% mismatch)`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -184,6 +202,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: source.overall_similarity || 0.5,
           explanation: `Found ${source.similar_documents.length} similar document(s)`,
           signal_type: 'similarity',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -195,6 +215,8 @@ export class DocumentExplainer implements IDocumentExplainer {
           score: source.modification_score,
           explanation: `Modification score: ${(source.modification_score * 100).toFixed(1)}%`,
           signal_type: 'manipulation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }

@@ -1,5 +1,4 @@
 import type {
-  IAudioExplainer,
   ExplanationObject,
   ExplanationSignalObject,
   EvidenceObject,
@@ -9,7 +8,7 @@ import { LocalizationProvider } from '../providers/LocalizationProvider'
 
 // ─── Audio Explainer ─────────────────────────────────────────────────────────
 
-export class AudioExplainer implements IAudioExplainer {
+export class AudioExplainer {
   private readonly builder: ExplanationBuilder
   private readonly localization: LocalizationProvider
 
@@ -59,6 +58,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: spectral.anomaly_severity || 0.5,
           explanation: this.explainSpectralAnomalies(spectral),
           signal_type: 'acoustic_artifact',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -75,6 +76,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 0.6,
           explanation: `Found ${artifacts.phase_inconsistencies.length} phase inconsistency(ies)`,
           signal_type: 'acoustic_artifact',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -86,6 +89,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: artifacts.quantization_noise,
           explanation: `Quantization noise detected at ${(artifacts.quantization_noise * 100).toFixed(1)}% level`,
           signal_type: 'acoustic_artifact',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -97,6 +102,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 0.5,
           explanation: 'No natural breathing patterns detected, which may indicate synthesis',
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -108,6 +115,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: artifacts.room_acoustics.severity || 0.5,
           explanation: this.explainRoomAcoustics(artifacts.room_acoustics),
           signal_type: 'acoustic_artifact',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -124,6 +133,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: speech.pitch_severity || 0.5,
           explanation: `Found ${speech.pitch_inconsistencies.length} pitch inconsistency(ies)`,
           signal_type: 'acoustic_artifact',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -135,6 +146,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 0.5,
           explanation: `Detected ${speech.rhythm_anomalies.length} rhythm anomaly(ies)`,
           signal_type: 'acoustic_artifact',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -146,6 +159,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 1 - speech.naturalness_score,
           explanation: `Speech naturalness score: ${(speech.naturalness_score * 100).toFixed(1)}%`,
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: speech.naturalness_score < 0.3 ? 'high' : 'medium',
           affected_region_ids: [],
         })
       }
@@ -162,6 +177,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: temporal.gap_severity || 0.5,
           explanation: `Found ${temporal.silence_gaps.length} unnatural silence gap(s)`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -173,6 +190,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 0.6,
           explanation: `Detected ${temporal.discontinuities.length} audio discontinuity(ies)`,
           signal_type: 'temporal_anomaly',
+          direction: 'supporting',
+          severity: 'medium',
           affected_region_ids: [],
         })
       }
@@ -190,6 +209,8 @@ export class AudioExplainer implements IAudioExplainer {
             score: modelSignal.confidence,
             explanation: this.explainModelSignal(modelSignal),
             signal_type: 'ai_generation',
+            direction: 'supporting',
+            severity: modelSignal.confidence > 0.8 ? 'high' : 'medium',
             affected_region_ids: [],
           })
         }
@@ -207,6 +228,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 0.8,
           explanation: `Detected signatures of synthesis tools: ${metadata.synthesis_tools.join(', ')}`,
           signal_type: 'ai_generation',
+          direction: 'supporting',
+          severity: 'high',
           affected_region_ids: [],
         })
       }
@@ -218,6 +241,8 @@ export class AudioExplainer implements IAudioExplainer {
           score: 0.5,
           explanation: `Found ${metadata.inconsistencies.length} metadata inconsistency(ies)`,
           signal_type: 'metadata_anomaly',
+          direction: 'supporting',
+          severity: 'low',
           affected_region_ids: [],
         })
       }

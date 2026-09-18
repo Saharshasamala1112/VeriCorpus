@@ -92,6 +92,9 @@ export type SignalType =
   | 'semantic_inconsistency'
   | 'contradiction'
   | 'authenticity_indicator'
+  | 'pattern'
+  | 'provenance'
+  | 'artifact'
 
 // ─── Explanation Signal Object ───────────────────────────────────────────────
 
@@ -132,6 +135,12 @@ export type EvidenceObjectType =
   | 'metadata'
   | 'comparison'
   | 'pattern'
+  | 'feature_vector'
+  | 'spectral_pattern'
+  | 'acoustic_pattern'
+  | 'temporal_pattern'
+  | 'source_comparison'
+  | 'contradiction'
 
 export interface EvidenceLocation {
   page?: number
@@ -315,7 +324,7 @@ export interface VisualizationOptions {
 }
 
 export interface IExplanationBuilder {
-  build(params: ExplanationBuilderParams): Promise<ExplanationObject>
+  build?(params: ExplanationBuilderParams): Promise<ExplanationObject>
 }
 
 export interface ExplanationBuilderParams {
@@ -333,7 +342,7 @@ export interface ExplanationBuilderParams {
 // ─── Modality-Specific Explainability Interfaces ─────────────────────────────
 
 export interface ITextExplainer {
-  explain(
+  explain?(
     text: string,
     signals: ExplanationSignalObject[],
     evidence: EvidenceObject[],
@@ -345,7 +354,7 @@ export interface ITextExplainer {
 }
 
 export interface IImageExplainer {
-  explain(
+  explain?(
     image: ImageData | HTMLCanvasElement,
     attribution?: AttributionResult,
     signals?: ExplanationSignalObject[],
@@ -358,7 +367,7 @@ export interface IImageExplainer {
 }
 
 export interface IVideoExplainer {
-  explain(
+  explain?(
     frames: FrameData[],
     duration: number,
     signals: ExplanationSignalObject[],
@@ -377,7 +386,7 @@ export interface FrameData {
 }
 
 export interface IAudioExplainer {
-  explain(
+  explain?(
     audio: AudioBuffer | Float32Array,
     sample_rate: number,
     signals: ExplanationSignalObject[],
@@ -391,7 +400,7 @@ export interface IAudioExplainer {
 }
 
 export interface IDocumentExplainer {
-  explain(
+  explain?(
     document: DocumentContent,
     signals: ExplanationSignalObject[],
     evidence: EvidenceObject[],
@@ -426,6 +435,49 @@ export interface PageMarker {
   page_number: number
   has_highlights: boolean
   highlight_count: number
+}
+
+// ─── Builder Helper Types ───────────────────────────────────────────────────
+
+export interface ExplanationSignals {
+  items: ExplanationSignalObject[]
+  significant: ExplanationSignalObject[]
+  supporting: ExplanationSignalObject[]
+}
+
+export interface Evidence {
+  items: EvidenceObject[]
+  by_type: Record<string, EvidenceObject[]>
+}
+
+export interface Confidence {
+  score: number
+  factors: ConfidenceFactor[]
+  overall_assessment: string
+}
+
+export interface ConfidenceFactor {
+  name: string
+  contribution: number
+  description: string
+}
+
+export interface Attribution {
+  method: string
+  affected_regions: AffectedRegion[]
+  affected_segments: AffectedSegment[]
+}
+
+export interface ModalityLimitations {
+  supported: boolean
+  attribution_method: string
+  limitations: string[]
+  granularity: string
+}
+
+export interface Visualizations {
+  available: boolean
+  types: string[]
 }
 
 // ─── Engine Configuration ────────────────────────────────────────────────────
