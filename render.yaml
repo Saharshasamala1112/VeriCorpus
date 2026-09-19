@@ -16,7 +16,7 @@ services:
       - key: CORPUS_DB_URL
         sync: false
       - key: CORS_ORIGINS
-        sync: false
+        value: "http://localhost:5173,https://localhost:5173,https://veri-corpus-12cj08ydc-saharshasamala1112s-projects.vercel.app"
       - key: GEMINI_API_KEY
         sync: false
       - key: GROQ_API_KEY

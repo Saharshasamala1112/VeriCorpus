@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     ALLOWED_MIME_TYPES: str = ""
     ALLOWED_PROVIDER_HOSTS: str = "api.corpus.swecha.org,api.openai.com,api.gemini.google.com,api.groq.com"
 
-    CORS_ORIGINS: str = "http://localhost:5173,https://localhost:5173"
+    CORS_ORIGINS: str = "http://localhost:5173,https://localhost:5173,https://veri-corpus-12cj08ydc-saharshasamala1112s-projects.vercel.app"
     RATE_LIMIT_PER_MINUTE: int = 60
 
     CORPUS_BASE_URL: str = "https://api.corpus.swecha.org"
