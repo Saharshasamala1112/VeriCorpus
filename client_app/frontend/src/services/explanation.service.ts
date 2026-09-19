@@ -947,7 +947,7 @@ export class ExplanationEngine {
         relevance: match.similarity_score,
         matchedClaim: match.input_span.text,
         excerpt: match.matched_text,
-        url: match.source_url ?? undefined,
+        url: match.source_url ?? null,
         verificationStatus: 'verified' as VerificationStatus,
         origin: 'global_source',
       }

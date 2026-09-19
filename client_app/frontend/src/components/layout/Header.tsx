@@ -36,11 +36,11 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   }, [])
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-slate-800/50 bg-[#070b12]/80 px-4 backdrop-blur-xl sm:px-6">
+    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-slate-200 bg-white/80 px-4 backdrop-blur-xl dark:border-slate-800/50 dark:bg-[#070b12]/80 sm:px-6">
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuToggle}
-          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white lg:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-white lg:hidden"
           aria-label="Open menu"
         >
           <Menu className="h-4 w-4" />
@@ -61,7 +61,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
         <div className="relative">
           <button
             onClick={() => setShowLang(!showLang)}
-            className="flex h-9 items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-3 text-xs text-slate-400 transition hover:border-slate-700 hover:text-white"
+            className="flex h-9 items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 text-xs text-slate-500 transition hover:border-slate-300 hover:text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white"
             aria-label="Select language"
           >
             <Globe className="h-3.5 w-3.5" />
@@ -70,7 +70,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             </span>
           </button>
           {showLang && (
-            <div className="absolute right-0 top-full z-50 mt-2 w-40 rounded-xl border border-slate-800 bg-slate-900 py-1 shadow-xl">
+            <div className="absolute right-0 top-full z-50 mt-2 w-40 rounded-xl border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-800 dark:bg-slate-900">
               {SUPPORTED_LANGUAGES.map((lang) => (
                 <button
                   key={lang.code}
@@ -78,8 +78,8 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     setSelectedLang(lang.code)
                     setShowLang(false)
                   }}
-                  className={`flex w-full items-center px-4 py-2 text-left text-sm transition hover:bg-slate-800 ${
-                    selectedLang === lang.code ? 'text-cyan-300' : 'text-slate-400'
+                  className={`flex w-full items-center px-4 py-2 text-left text-sm transition hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                    selectedLang === lang.code ? 'text-cyan-600 dark:text-cyan-300' : 'text-slate-500 dark:text-slate-400'
                   }`}
                 >
                   {lang.label}
@@ -91,7 +91,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
 
         <button
           onClick={toggle}
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-slate-700 hover:text-white"
+          className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-slate-300 hover:text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white"
           aria-label="Toggle theme"
         >
           {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -100,7 +100,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
         <button
           type="button"
           onClick={logout}
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-800 bg-slate-900 text-slate-400 transition hover:border-red-400/40 hover:text-red-300"
+          className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-red-400/40 hover:text-red-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-red-400/40 dark:hover:text-red-300"
           aria-label="Sign out"
         >
           <LogOut className="h-4 w-4" />

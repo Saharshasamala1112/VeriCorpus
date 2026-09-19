@@ -29,7 +29,7 @@ export default function StatusIndicator({
   const displayLabel = label || config.label
 
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs text-slate-400 ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 ${className}`}>
       <span className="relative flex">
         <span className={`rounded-full ${config.color} ${sizeStyles[size]}`} />
         {status === 'loading' && (

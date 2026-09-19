@@ -1,43 +1,57 @@
 import { z } from 'zod'
+import { countries } from '../config/countries'
+
+const countryCodes = countries.map((c) => c.code)
 
 export const loginSchema = z.object({
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  identifier: z.string().min(1, 'Email or phone is required'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
 })
 
-export const otpLoginSchema = z.object({
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-})
-
-export const otpVerifySchema = z.object({
-  otp_code: z.string().length(6, 'OTP must be exactly 6 digits'),
-})
-
-export const signupOTPSchema = z.object({
-  phone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  name: z.string().min(2, 'Name must be at least 2 characters').optional(),
-  email: z.string().email('Invalid email').optional(),
-})
-
-export const signupOTPVerifySchema = z
+export const registerSchema = z
   .object({
-    otp_code: z.string().length(6, 'OTP must be exactly 6 digits'),
-    password: z.string().min(6, 'Password must be at least 6 characters'),
-    confirmPassword: z.string(),
+    full_name: z.string().min(2, 'Full name must be at least 2 characters').max(100),
+    email: z.string().email('Invalid email address'),
+    phone: z.string().min(10, 'Phone number must be at least 10 digits').max(15),
+    country_code: z.string().refine((code) => countryCodes.includes(code), {
+      message: 'Please select a valid country',
+    }),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/[0-9]/, 'Password must contain at least one number')
+      .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character'),
+    confirm_password: z.string(),
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirm_password, {
     message: 'Passwords do not match',
-    path: ['confirmPassword'],
+    path: ['confirm_password'],
   })
 
-export const uploadSchema = z.object({
-  title: z.string().optional(),
-  description: z.string().optional(),
+export const forgotPasswordSchema = z.object({
+  email: z.string().email('Invalid email address'),
 })
+
+export const resetPasswordSchema = z
+  .object({
+    token: z.string().min(1, 'Invalid reset token'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/[0-9]/, 'Password must contain at least one number')
+      .regex(/[^A-Za-z0-9]/, 'Password must contain at least one special character'),
+    confirm_password: z.string(),
+  })
+  .refine((data) => data.password === data.confirm_password, {
+    message: 'Passwords do not match',
+    path: ['confirm_password'],
+  })
 
 export type LoginFormData = z.infer<typeof loginSchema>
-export type OTPLoginFormData = z.infer<typeof otpLoginSchema>
-export type OTPVerifyFormData = z.infer<typeof otpVerifySchema>
-export type SignupOTPFormData = z.infer<typeof signupOTPSchema>
-export type SignupOTPVerifyFormData = z.infer<typeof signupOTPVerifySchema>
-export type UploadFormData = z.infer<typeof uploadSchema>
+export type RegisterFormData = z.infer<typeof registerSchema>
+export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>
+export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>

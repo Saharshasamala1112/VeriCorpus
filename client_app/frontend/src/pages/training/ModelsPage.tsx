@@ -37,7 +37,7 @@ export default function ModelsPage() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Models</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Models</h1>
             <p className="mt-1 text-sm text-slate-500">Loading models...</p>
           </div>
         </div>
@@ -45,15 +45,15 @@ export default function ModelsPage() {
           {[1, 2].map((i) => (
             <Card key={i} className="animate-pulse space-y-4">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-slate-800" />
+                <div className="h-10 w-10 rounded-xl bg-slate-200 dark:bg-slate-800" />
                 <div className="space-y-2">
-                  <div className="h-4 w-32 rounded bg-slate-800" />
-                  <div className="h-3 w-48 rounded bg-slate-800" />
+                  <div className="h-4 w-32 rounded bg-slate-200 dark:bg-slate-800" />
+                  <div className="h-3 w-48 rounded bg-slate-200 dark:bg-slate-800" />
                 </div>
               </div>
               <div className="space-y-2">
-                <div className="h-3 w-full rounded bg-slate-800" />
-                <div className="h-3 w-3/4 rounded bg-slate-800" />
+                <div className="h-3 w-full rounded bg-slate-200 dark:bg-slate-800" />
+                <div className="h-3 w-3/4 rounded bg-slate-200 dark:bg-slate-800" />
               </div>
             </Card>
           ))}
@@ -66,7 +66,7 @@ export default function ModelsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Models</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Models</h1>
           <p className="mt-1 text-sm text-slate-500">View registered ML models and their status.</p>
         </div>
       </div>
@@ -81,11 +81,11 @@ export default function ModelsPage() {
             <Card key={model.id} variant="interactive">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
                     <BrainCircuit className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold text-white">{model.name}</h3>
+                    <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{model.name}</h3>
                     <p className="text-xs text-slate-500">
                       {model.modality} — {model.versions.length} version(s)
                     </p>

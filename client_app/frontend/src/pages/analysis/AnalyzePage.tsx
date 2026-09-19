@@ -25,7 +25,7 @@ export default function AnalyzePage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Analyze Content</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Analyze Content</h1>
         <p className="mt-1 text-sm text-slate-500">
           Select a media type to begin authenticity analysis.
         </p>
@@ -38,13 +38,13 @@ export default function AnalyzePage() {
             <button
               key={type}
               onClick={() => navigate(routeMap[type])}
-              className="group flex flex-col rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 text-left transition-all duration-200 hover:border-slate-700 hover:bg-slate-800/30"
+              className="group flex flex-col rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 p-6 text-left transition-all duration-200 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-100/30 dark:hover:bg-slate-800/30"
             >
               <div className="mb-4 flex items-center gap-3">
                 <config.icon className={`h-6 w-6 ${colorAccent[config.color]}`} />
-                <h3 className="text-base font-semibold text-white">{config.label}</h3>
+                <h3 className="text-base font-semibold text-slate-900 dark:text-white">{config.label}</h3>
               </div>
-              <p className="text-sm text-slate-400">{config.description}</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{config.description}</p>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {config.acceptedFormats.map((fmt) => (
                   <span

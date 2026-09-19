@@ -121,18 +121,18 @@ function Section({ title, icon, badge, defaultOpen = false, children }: SectionP
 
   return (
     <section
-      className="rounded-xl border border-slate-800/80 bg-slate-900/50 overflow-hidden"
+      className="rounded-xl border border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 overflow-hidden"
       aria-label={title}
     >
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left transition-colors hover:bg-slate-800/30"
+        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left transition-colors hover:bg-slate-100/30 dark:hover:bg-slate-800/30"
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-2.5">
           {icon}
-          <h2 className="text-sm font-semibold text-white">{title}</h2>
+          <h2 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h2>
           {badge}
         </div>
         <ChevronDownIcon
@@ -141,7 +141,7 @@ function Section({ title, icon, badge, defaultOpen = false, children }: SectionP
           }`}
         />
       </button>
-      {isOpen && <div className="border-t border-slate-800/50 px-5 py-5">{children}</div>}
+      {isOpen && <div className="border-t border-slate-200/50 dark:border-slate-800/50 px-5 py-5">{children}</div>}
     </section>
   )
 }
@@ -199,8 +199,8 @@ export default function AnalysisResultPage() {
       <Suspense
         fallback={
           <div className="space-y-4">
-            <div className="h-8 w-48 bg-slate-800 rounded animate-pulse" />
-            <div className="h-64 bg-slate-800 rounded-xl animate-pulse" />
+            <div className="h-8 w-48 bg-slate-200 dark:bg-slate-800 rounded animate-pulse" />
+            <div className="h-64 bg-slate-200 dark:bg-slate-800 rounded-xl animate-pulse" />
           </div>
         }
       >
@@ -212,8 +212,8 @@ export default function AnalysisResultPage() {
   if (!liveResult) {
     return (
       <div className="space-y-4">
-        <h1 className="text-xl font-bold text-white">{template.page.noResult}</h1>
-        <p className="text-sm text-slate-400">{template.page.noResultDescription}</p>
+        <h1 className="text-xl font-bold text-slate-900 dark:text-white">{template.page.noResult}</h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">{template.page.noResultDescription}</p>
         <button className="text-sm text-cyan-400" onClick={() => navigate('/analyze')}>
           {template.page.startAnalysis}
         </button>
@@ -241,13 +241,13 @@ export default function AnalysisResultPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate(-1)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition hover:bg-slate-800 hover:text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
             aria-label="Go back"
           >
             <ArrowLeft className="h-4 w-4" />
           </button>
           <div>
-            <h1 className="text-xl font-bold text-white">{template.page.analysisResult}</h1>
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white">{template.page.analysisResult}</h1>
             <p className="text-sm text-slate-500">{result.filename}</p>
           </div>
         </div>
@@ -255,7 +255,7 @@ export default function AnalysisResultPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowAccessible(!showAccessible)}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/70 text-slate-400 transition hover:border-cyan-400/30 hover:text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 text-slate-500 dark:text-slate-400 transition hover:border-cyan-400/30 hover:text-slate-900 dark:hover:text-white"
             aria-label={showAccessible ? 'Hide accessible view' : 'Show accessible view'}
             title={showAccessible ? 'Hide accessible view' : 'Show accessible view'}
           >
@@ -265,7 +265,7 @@ export default function AnalysisResultPage() {
           <ExportMenu result={result} template={template} />
           <button
             onClick={handleShare}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/70 text-slate-400 transition hover:border-cyan-400/30 hover:text-white"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 text-slate-500 dark:text-slate-400 transition hover:border-cyan-400/30 hover:text-slate-900 dark:hover:text-white"
             aria-label="Share"
           >
             <Share2 className="h-4 w-4" />
@@ -296,7 +296,7 @@ export default function AnalysisResultPage() {
         <section aria-label="Affected areas visualization" className="space-y-3">
           <div className="flex items-center gap-2">
             <Eye className="h-4 w-4 text-purple-400" />
-            <h2 className="text-sm font-semibold text-white">Affected Areas</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Affected Areas</h2>
             <span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-[10px] text-purple-300">
               {result.mediaType}
             </span>

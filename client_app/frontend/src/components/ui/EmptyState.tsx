@@ -21,10 +21,10 @@ export default function EmptyState({
       className={`flex flex-col items-center justify-center py-16 text-center ${className}`}
       role="status"
     >
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-800/50 text-slate-500">
+      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-400 dark:bg-slate-800/50 dark:text-slate-500">
         {icon || <Inbox className="h-7 w-7" />}
       </div>
-      <h3 className="text-sm font-semibold text-white">{title}</h3>
+      <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h3>
       {description && <p className="mt-1 max-w-sm text-xs text-slate-500">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
     </div>

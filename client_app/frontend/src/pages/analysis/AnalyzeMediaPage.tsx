@@ -99,13 +99,13 @@ export default function AnalyzeMediaPage({ mediaType }: AnalyzeMediaPageProps) {
       <div className="flex items-center gap-3">
         <button
           onClick={() => navigate(ROUTES.ANALYZE)}
-          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition hover:bg-slate-800 hover:text-white"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
           aria-label="Back to analyze"
         >
           <ArrowLeft className="h-4 w-4" />
         </button>
         <div>
-          <h1 className="text-xl font-bold text-white">{config.label}</h1>
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white">{config.label}</h1>
           <p className="text-sm text-slate-500">{config.description}</p>
         </div>
       </div>
@@ -131,7 +131,7 @@ export default function AnalyzeMediaPage({ mediaType }: AnalyzeMediaPageProps) {
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                   inputMode === 'paste'
                     ? 'bg-cyan-400 text-slate-950'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <Clipboard className="h-3.5 w-3.5" /> Paste text
@@ -141,7 +141,7 @@ export default function AnalyzeMediaPage({ mediaType }: AnalyzeMediaPageProps) {
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                   inputMode === 'upload'
                     ? 'bg-cyan-400 text-slate-950'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 <FileText className="h-3.5 w-3.5" /> Upload file
@@ -157,7 +157,7 @@ export default function AnalyzeMediaPage({ mediaType }: AnalyzeMediaPageProps) {
                   onChange={(e) => setTextInput(e.target.value)}
                   placeholder="Paste or type text to analyze..."
                   rows={12}
-                  className="w-full rounded-xl border border-slate-800 bg-slate-900/70 p-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400/40 resize-y"
+                  className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 p-4 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400/40 resize-y"
                 />
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-slate-500">

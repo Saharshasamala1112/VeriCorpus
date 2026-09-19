@@ -31,7 +31,7 @@ export default function Tooltip({ content, children, side = 'top', className = '
       {show && (
         <div
           role="tooltip"
-          className={`absolute z-50 whitespace-nowrap rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs text-white shadow-lg ${
+          className={`absolute z-50 whitespace-nowrap rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs text-white shadow-lg dark:bg-slate-800 ${
             side === 'top'
               ? 'bottom-full mb-2 left-1/2 -translate-x-1/2'
               : 'top-full mt-2 left-1/2 -translate-x-1/2'

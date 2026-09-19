@@ -13,23 +13,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="space-y-1.5">
         {label && (
-          <label htmlFor={inputId} className="block text-sm font-medium text-slate-300">
+          <label htmlFor={inputId} className="block text-sm font-medium text-slate-600 dark:text-slate-300">
             {label}
           </label>
         )}
         <div className="relative">
           {icon && (
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">{icon}</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500">{icon}</span>
           )}
           <input
             ref={ref}
             id={inputId}
-            className={`w-full rounded-xl border bg-slate-900/70 px-4 py-2.5 text-sm text-white placeholder-slate-500 transition-all duration-150 focus:outline-none focus:ring-1 focus:ring-offset-0 ${
+            className={`w-full rounded-xl border bg-white/70 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 transition-all duration-150 focus:outline-none focus:ring-1 focus:ring-offset-0 dark:bg-slate-900/70 dark:text-white dark:placeholder-slate-500 ${
               icon ? 'pl-10' : ''
             } ${
               error
                 ? 'border-red-500/50 focus:border-red-400/60 focus:ring-red-400/20'
-                : 'border-slate-800 focus:border-cyan-400/60 focus:ring-cyan-400/20'
+                : 'border-slate-200 focus:border-cyan-400/60 focus:ring-cyan-400/20 dark:border-slate-800 dark:focus:border-cyan-400/60 dark:focus:ring-cyan-400/20'
             } ${className}`}
             aria-invalid={error ? 'true' : undefined}
             aria-describedby={error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined}

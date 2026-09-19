@@ -37,7 +37,7 @@ export function TabsList({
 }) {
   return (
     <div
-      className={`flex gap-1 rounded-xl border border-slate-800 bg-slate-900/50 p-1 ${className}`}
+      className={`flex gap-1 rounded-xl border border-slate-200 bg-slate-100/50 p-1 dark:border-slate-800 dark:bg-slate-900/50 ${className}`}
       role="tablist"
     >
       {children}
@@ -54,7 +54,7 @@ export function TabsTrigger({ id, children }: { id: string; children: ReactNode 
       aria-selected={isActive}
       onClick={() => setActiveTab(id)}
       className={`flex-1 rounded-lg px-3 py-2 text-xs font-medium transition-all ${
-        isActive ? 'bg-cyan-400 text-slate-950' : 'text-slate-400 hover:text-white'
+        isActive ? 'bg-cyan-400 text-slate-950' : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
       }`}
     >
       {children}

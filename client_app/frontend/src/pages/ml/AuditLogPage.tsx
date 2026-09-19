@@ -73,7 +73,7 @@ function DetailsView({ details }: { details: Record<string, unknown> }) {
       {entries.map(([key, value]) => (
         <span key={key} className="text-slate-500">
           {key}:{' '}
-          <span className="text-white">
+          <span className="text-slate-900 dark:text-white">
             {typeof value === 'number'
               ? value < 1
                 ? `${(value * 100).toFixed(1)}%`
@@ -90,17 +90,17 @@ function SkeletonAuditEntry() {
   return (
     <div className="px-6 py-4 animate-pulse">
       <div className="flex items-start gap-3">
-        <div className="h-6 w-6 shrink-0 rounded-full bg-slate-800" />
+        <div className="h-6 w-6 shrink-0 rounded-full bg-slate-200 dark:bg-slate-800" />
         <div className="space-y-2 flex-1">
           <div className="flex items-center gap-2">
-            <div className="h-5 w-20 rounded bg-slate-800" />
-            <div className="h-4 w-32 rounded bg-slate-800" />
+            <div className="h-5 w-20 rounded bg-slate-200 dark:bg-slate-800" />
+            <div className="h-4 w-32 rounded bg-slate-200 dark:bg-slate-800" />
           </div>
-          <div className="h-3 w-48 rounded bg-slate-800" />
+          <div className="h-3 w-48 rounded bg-slate-200 dark:bg-slate-800" />
         </div>
         <div className="space-y-2">
-          <div className="h-3 w-16 rounded bg-slate-800" />
-          <div className="h-3 w-20 rounded bg-slate-800" />
+          <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="h-3 w-20 rounded bg-slate-200 dark:bg-slate-800" />
         </div>
       </div>
     </div>
@@ -155,8 +155,8 @@ export default function AuditLogPage() {
       <AuthGate allowedRoles={AUTHORIZED_ROLES_FOR_MLOPS}>
         <div className="space-y-6">
           <div>
-            <div className="h-8 w-40 rounded bg-slate-800 animate-pulse" />
-            <div className="mt-1 h-4 w-64 rounded bg-slate-800 animate-pulse" />
+            <div className="h-8 w-40 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
+            <div className="mt-1 h-4 w-64 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
           </div>
           <Card padding="none">
             <SkeletonAuditEntry />
@@ -174,7 +174,7 @@ export default function AuditLogPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Audit Log</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Audit Log</h1>
             <p className="mt-1 text-sm text-slate-500">
               Track all model and dataset operations for compliance and review.
             </p>
@@ -204,7 +204,7 @@ export default function AuditLogPage() {
                   className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-medium transition ${
                     isActive
                       ? 'border-cyan-500/50 bg-cyan-500/10 text-cyan-400'
-                      : 'border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-400'
+                       : 'border-slate-200 dark:border-slate-800 text-slate-500 hover:border-slate-300 dark:hover:border-slate-700 hover:text-slate-500 dark:hover:text-slate-400'
                   }`}
                 >
                   {config?.label ?? type}
@@ -221,12 +221,12 @@ export default function AuditLogPage() {
 
         {/* Log entries */}
         <Card padding="none">
-          <div className="divide-y divide-slate-800/50">
+          <div className="divide-y divide-slate-200/50 dark:divide-slate-800/50">
             {filteredLogs.length === 0 ? (
               <div className="text-center py-12">
                 <Search className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-white mb-2">No entries found</h3>
-                <p className="text-sm text-slate-400">Try adjusting your search or filters.</p>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No entries found</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">Try adjusting your search or filters.</p>
               </div>
             ) : (
               filteredLogs.map((entry) => {
@@ -236,7 +236,7 @@ export default function AuditLogPage() {
                 return (
                   <div key={entry.id} className="px-6 py-4">
                     <div className="flex items-start gap-3">
-                      <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-700 bg-slate-800">
+                       <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-800">
                         <EventIcon className="h-3 w-3" />
                       </div>
 
@@ -245,12 +245,12 @@ export default function AuditLogPage() {
                           <Badge variant={config?.variant ?? 'default'} size="sm">
                             {config?.label ?? entry.event}
                           </Badge>
-                          <span className="text-xs text-slate-400 font-medium">
+                           <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                             {entry.targetName}
                           </span>
                         </div>
-                        <p className="text-sm text-slate-300">
-                          Target: <span className="text-white">{entry.targetName}</span>
+                         <p className="text-sm text-slate-600 dark:text-slate-300">
+                           Target: <span className="text-slate-900 dark:text-white">{entry.targetName}</span>
                           <span className="text-slate-600 mx-2">|</span>
                           <span className="text-slate-500">{entry.targetType}</span>
                         </p>

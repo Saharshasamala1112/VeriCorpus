@@ -33,10 +33,10 @@ function formatTimestamp(ts: string): string {
 function SkeletonCard() {
   return (
     <Card padding="sm" className="flex items-center gap-4 animate-pulse">
-      <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-800" />
+      <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-200 dark:bg-slate-800" />
       <div className="space-y-2">
-        <div className="h-5 w-12 rounded bg-slate-800" />
-        <div className="h-3 w-16 rounded bg-slate-800" />
+        <div className="h-5 w-12 rounded bg-slate-200 dark:bg-slate-800" />
+        <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-800" />
       </div>
     </Card>
   )
@@ -46,11 +46,11 @@ function SkeletonJob() {
   return (
     <div className="px-6 py-4 animate-pulse">
       <div className="flex items-start gap-3">
-        <div className="h-6 w-6 shrink-0 rounded-full bg-slate-800" />
+        <div className="h-6 w-6 shrink-0 rounded-full bg-slate-200 dark:bg-slate-800" />
         <div className="space-y-2 flex-1">
-          <div className="h-4 w-32 rounded bg-slate-800" />
-          <div className="h-3 w-48 rounded bg-slate-800" />
-          <div className="h-3 w-64 rounded bg-slate-800" />
+          <div className="h-4 w-32 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="h-3 w-48 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="h-3 w-64 rounded bg-slate-200 dark:bg-slate-800" />
         </div>
       </div>
     </div>
@@ -89,8 +89,8 @@ export default function TrainingDashboard() {
       <AuthGate allowedRoles={AUTHORIZED_ROLES_FOR_MLOPS}>
         <div className="space-y-6">
           <div>
-            <div className="h-8 w-48 rounded bg-slate-800 animate-pulse" />
-            <div className="mt-1 h-4 w-64 rounded bg-slate-800 animate-pulse" />
+            <div className="h-8 w-48 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
+            <div className="mt-1 h-4 w-64 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <SkeletonCard />
@@ -114,7 +114,7 @@ export default function TrainingDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Training Dashboard</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Training Dashboard</h1>
             <p className="mt-1 text-sm text-slate-500">
               Monitor and manage model training operations.
             </p>
@@ -128,7 +128,7 @@ export default function TrainingDashboard() {
               <Loader2 className="h-5 w-5 animate-spin" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{runningJobs.length}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{runningJobs.length}</p>
               <p className="text-xs text-slate-500">Running</p>
             </div>
           </Card>
@@ -137,7 +137,7 @@ export default function TrainingDashboard() {
               <CheckCircle className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{completedJobs.length}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{completedJobs.length}</p>
               <p className="text-xs text-slate-500">Completed</p>
             </div>
           </Card>
@@ -146,16 +146,16 @@ export default function TrainingDashboard() {
               <AlertTriangle className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{failedJobs.length}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{failedJobs.length}</p>
               <p className="text-xs text-slate-500">Failed</p>
             </div>
           </Card>
           <Card padding="sm" className="flex items-center gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
               <Clock className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{queuedJobs.length}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{queuedJobs.length}</p>
               <p className="text-xs text-slate-500">Queued</p>
             </div>
           </Card>
@@ -164,13 +164,13 @@ export default function TrainingDashboard() {
         {/* Running Jobs */}
         {runningJobs.length > 0 && (
           <Card padding="none">
-            <div className="border-b border-slate-800/50 px-6 py-4">
-              <h2 className="flex items-center gap-2 text-sm font-semibold text-white">
+            <div className="border-b border-slate-200/50 dark:border-slate-800/50 px-6 py-4">
+              <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
                 <Loader2 className="h-4 w-4 text-amber-400 animate-spin" />
                 Running Jobs
               </h2>
             </div>
-            <div className="divide-y divide-slate-800/50">
+            <div className="divide-y divide-slate-200/50 dark:divide-slate-800/50">
               {runningJobs.map((job) => (
                 <div key={job.id} className="px-6 py-4">
                   <div className="flex items-start justify-between">
@@ -180,12 +180,12 @@ export default function TrainingDashboard() {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-sm font-semibold text-white">{job.modelVersion}</h3>
+                           <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{job.modelVersion}</h3>
                           <Badge variant="warning" size="sm">
                             Running
                           </Badge>
                         </div>
-                        <p className="mt-1 text-xs text-slate-400">
+                        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                           {job.datasetName} → {job.modelName}
                         </p>
                         <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
@@ -204,7 +204,7 @@ export default function TrainingDashboard() {
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-slate-500">Optimizer</p>
-                      <p className="text-sm font-medium text-white uppercase">
+                      <p className="text-sm font-medium text-slate-900 dark:text-white uppercase">
                         {job.config.optimizer}
                       </p>
                     </div>
@@ -219,8 +219,8 @@ export default function TrainingDashboard() {
         {jobs.length === 0 && (
           <Card className="text-center py-12">
             <CheckCircle className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">No training jobs</h3>
-            <p className="text-sm text-slate-400">No training jobs have been created yet.</p>
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No training jobs</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400">No training jobs have been created yet.</p>
           </Card>
         )}
 
@@ -258,15 +258,15 @@ function JobList({ jobs }: { jobs: TrainingJob[] }) {
     return (
       <Card className="text-center py-12">
         <CheckCircle className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-        <h3 className="text-lg font-semibold text-white mb-2">No jobs</h3>
-        <p className="text-sm text-slate-400">No training jobs match this filter.</p>
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No jobs</h3>
+        <p className="text-sm text-slate-500 dark:text-slate-400">No training jobs match this filter.</p>
       </Card>
     )
   }
 
   return (
     <Card padding="none">
-      <div className="divide-y divide-slate-800/50">
+      <div className="divide-y divide-slate-200/50 dark:divide-slate-800/50">
         {jobs.map((job) => {
           const statusConfig = STATUS_CONFIG[job.status]
           const StatusIcon = statusConfig.icon
@@ -275,57 +275,57 @@ function JobList({ jobs }: { jobs: TrainingJob[] }) {
             <div key={job.id} className="px-6 py-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-3">
-                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-700 bg-slate-800">
+                   <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-800">
                     <StatusIcon
                       className={`h-3 w-3 ${job.status === 'running' ? 'animate-spin' : ''}`}
                     />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-semibold text-white">{job.modelVersion}</h3>
-                      <Badge variant={statusConfig.variant} size="sm">
-                        {statusConfig.label}
-                      </Badge>
-                    </div>
-                    <p className="mt-1 text-xs text-slate-400">
-                      {job.datasetName} → {job.modelName}
-                    </p>
-                    <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {formatTimestamp(job.startTime)}
-                      </span>
-                      {job.endTime && <span>Duration: {job.duration}</span>}
-                      {job.error && <span className="text-red-400">{job.error}</span>}
-                      <span>By: {job.triggeredBy}</span>
+                       <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{job.modelVersion}</h3>
+                       <Badge variant={statusConfig.variant} size="sm">
+                         {statusConfig.label}
+                       </Badge>
+                     </div>
+                     <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                       {job.datasetName} → {job.modelName}
+                     </p>
+                     <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
+                       <span className="flex items-center gap-1">
+                         <Calendar className="h-3 w-3" />
+                         {formatTimestamp(job.startTime)}
+                       </span>
+                       {job.endTime && <span>Duration: {job.duration}</span>}
+                       {job.error && <span className="text-red-400">{job.error}</span>}
+                       <span>By: {job.triggeredBy}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Metrics */}
                 {job.metrics && (
-                  <div className="rounded-lg bg-slate-800/30 p-3 text-right">
+                  <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-3 text-right">
                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[11px]">
                       {job.metrics.accuracy != null && (
                         <>
                           <span className="text-slate-500">Accuracy:</span>
-                          <span className="text-white font-medium">
-                            {(job.metrics.accuracy * 100).toFixed(1)}%
-                          </span>
-                        </>
-                      )}
-                      {job.metrics.f1Score != null && (
-                        <>
-                          <span className="text-slate-500">F1:</span>
-                          <span className="text-white font-medium">
-                            {(job.metrics.f1Score * 100).toFixed(1)}%
-                          </span>
-                        </>
-                      )}
-                      {job.metrics.loss != null && (
-                        <>
-                          <span className="text-slate-500">Loss:</span>
-                          <span className="text-white font-medium">
+                           <span className="text-slate-900 dark:text-white font-medium">
+                             {(job.metrics.accuracy * 100).toFixed(1)}%
+                           </span>
+                         </>
+                       )}
+                       {job.metrics.f1Score != null && (
+                         <>
+                           <span className="text-slate-500">F1:</span>
+                           <span className="text-slate-900 dark:text-white font-medium">
+                             {(job.metrics.f1Score * 100).toFixed(1)}%
+                           </span>
+                         </>
+                       )}
+                       {job.metrics.loss != null && (
+                         <>
+                           <span className="text-slate-500">Loss:</span>
+                           <span className="text-slate-900 dark:text-white font-medium">
                             {job.metrics.loss.toFixed(4)}
                           </span>
                         </>

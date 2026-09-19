@@ -30,6 +30,15 @@ class Settings(BaseSettings):
     CORPUS_PHONE: str = ""
     CORPUS_PASSWORD: str = ""
 
+    # Email Service
+    SMTP_HOST: str = "localhost"
+    SMTP_PORT: int = 587
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    FROM_EMAIL: str = "noreply@vericorpus.ai"
+    FROM_NAME: str = "VeriCorpus AI"
+    FRONTEND_URL: str = "http://localhost:5173"
+
     GEMINI_API_KEY: str = ""
     GROQ_API_KEY: str = ""
     GROQ_MODEL: str = "llama-3.3-70b-versatile"

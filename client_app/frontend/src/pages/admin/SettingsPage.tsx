@@ -152,7 +152,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Settings</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Settings</h1>
         <p className="mt-1 text-sm text-slate-500">Configure your VeriCorpus AI experience.</p>
       </div>
 
@@ -164,12 +164,12 @@ export default function SettingsPage() {
             ) : (
               <Sun className="h-4 w-4 text-amber-400" />
             )}
-            <h2 className="text-sm font-semibold text-white">Appearance</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Appearance</h2>
           </div>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-400">Theme</span>
-              <div className="flex gap-1 rounded-xl border border-slate-800 bg-slate-900 p-1">
+              <span className="text-sm text-slate-500 dark:text-slate-400">Theme</span>
+              <div className="flex gap-1 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-1">
                 {themeOptions.map((opt) => (
                   <button
                     key={opt.value}
@@ -177,7 +177,7 @@ export default function SettingsPage() {
                     className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                       mode === opt.value
                         ? 'bg-cyan-500/20 text-cyan-400'
-                        : 'text-slate-400 hover:text-slate-300'
+                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-600 dark:hover:text-slate-300'
                     }`}
                   >
                     {opt.value === 'light' && <Sun className="h-3 w-3" />}
@@ -194,7 +194,7 @@ export default function SettingsPage() {
         <Card>
           <div className="mb-4 flex items-center gap-2">
             <Globe className="h-4 w-4 text-cyan-400" />
-            <h2 className="text-sm font-semibold text-white">Language</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Language</h2>
           </div>
           <Select
             value={language}
@@ -209,16 +209,16 @@ export default function SettingsPage() {
         <Card>
           <div className="mb-4 flex items-center gap-2">
             <Bell className="h-4 w-4 text-cyan-400" />
-            <h2 className="text-sm font-semibold text-white">Notifications</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Notifications</h2>
           </div>
           <div className="space-y-3">
             {['Analysis complete', 'Model updates', 'Dataset sync'].map((item) => (
               <label key={item} className="flex items-center justify-between">
-                <span className="text-sm text-slate-400">{item}</span>
+                <span className="text-sm text-slate-500 dark:text-slate-400">{item}</span>
                 <input
                   type="checkbox"
                   defaultChecked
-                  className="h-4 w-4 rounded border-slate-700 bg-slate-800 text-cyan-400 focus:ring-cyan-400/40"
+                  className="h-4 w-4 rounded border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-800 text-cyan-400 focus:ring-cyan-400/40"
                 />
               </label>
             ))}
@@ -228,7 +228,7 @@ export default function SettingsPage() {
         <Card>
           <div className="mb-4 flex items-center gap-2">
             <Database className="h-4 w-4 text-cyan-400" />
-            <h2 className="text-sm font-semibold text-white">API Configuration</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">API Configuration</h2>
           </div>
           <div className="space-y-3">
             <Input label="API Base URL" defaultValue="http://localhost:8000/api/v1" />
@@ -239,11 +239,11 @@ export default function SettingsPage() {
         <Card>
           <div className="mb-4 flex items-center gap-2">
             <Shield className="h-4 w-4 text-cyan-400" />
-            <h2 className="text-sm font-semibold text-white">Security</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Security</h2>
           </div>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-slate-400">Session</span>
+              <span className="text-sm text-slate-500 dark:text-slate-400">Session</span>
               <span className="inline-flex items-center gap-1 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-400">
                 Active
               </span>
@@ -257,7 +257,7 @@ export default function SettingsPage() {
         <Card className="lg:col-span-3">
           <div className="mb-4 flex items-center gap-2">
             <Link className="h-4 w-4 text-cyan-400" />
-            <h2 className="text-sm font-semibold text-white">Corpus Integration</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Corpus Integration</h2>
           </div>
           <div className="space-y-4">
             {corpusStatus?.connected ? (
@@ -268,7 +268,7 @@ export default function SettingsPage() {
                       Connected
                     </span>
                     {corpusStatus.corpus_phone && (
-                      <span className="flex items-center gap-1 text-sm text-slate-400">
+                      <span className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
                         <Phone className="h-3.5 w-3.5" /> {corpusStatus.corpus_phone}
                       </span>
                     )}
@@ -290,11 +290,11 @@ export default function SettingsPage() {
               </div>
             ) : (
               <div className="space-y-4">
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
                   Connect your Corpus account to access language datasets, sync records, and use
                   Corpus-powered analysis features.
                 </p>
-                <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-4 space-y-3">
+                <div className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-4 space-y-3">
                   <div className="flex gap-2">
                     <button
                       onClick={() => {
@@ -306,7 +306,7 @@ export default function SettingsPage() {
                       className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                         otpMode === 'login'
                           ? 'bg-cyan-500/20 text-cyan-400'
-                          : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                          : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <Phone className="h-3.5 w-3.5" /> Login with OTP
@@ -321,7 +321,7 @@ export default function SettingsPage() {
                       className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                         otpMode === 'signup'
                           ? 'bg-cyan-500/20 text-cyan-400'
-                          : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                          : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <Mail className="h-3.5 w-3.5" /> Sign up with OTP
@@ -336,7 +336,7 @@ export default function SettingsPage() {
                       className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                         !otpSent
                           ? 'bg-cyan-500/20 text-cyan-400'
-                          : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                          : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       <Shield className="h-3.5 w-3.5" /> Phone + Password
@@ -446,9 +446,9 @@ export default function SettingsPage() {
 
         <Card>
           <div className="mb-4">
-            <h2 className="text-sm font-semibold text-white">About</h2>
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">About</h2>
           </div>
-          <div className="space-y-2 text-sm text-slate-400">
+          <div className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
             <p>VeriCorpus AI v1.0.0</p>
             <p>Multimodal content authenticity platform</p>
           </div>

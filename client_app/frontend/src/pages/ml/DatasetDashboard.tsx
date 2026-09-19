@@ -53,11 +53,11 @@ function StatCard({
 }) {
   return (
     <Card padding="sm" className="flex items-center gap-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
         <Icon className="h-5 w-5" />
       </div>
       <div>
-        <p className="text-lg font-bold text-white">{value}</p>
+        <p className="text-lg font-bold text-slate-900 dark:text-white">{value}</p>
         <p className="text-xs text-slate-500">{label}</p>
       </div>
       {change && (
@@ -73,15 +73,15 @@ function SkeletonCard() {
   return (
     <Card className="animate-pulse space-y-4">
       <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-xl bg-slate-800" />
+        <div className="h-10 w-10 rounded-xl bg-slate-200 dark:bg-slate-800" />
         <div className="space-y-2">
-          <div className="h-4 w-32 rounded bg-slate-800" />
-          <div className="h-3 w-48 rounded bg-slate-800" />
+          <div className="h-4 w-32 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="h-3 w-48 rounded bg-slate-200 dark:bg-slate-800" />
         </div>
       </div>
       <div className="space-y-2">
-        <div className="h-3 w-full rounded bg-slate-800" />
-        <div className="h-3 w-3/4 rounded bg-slate-800" />
+        <div className="h-3 w-full rounded bg-slate-200 dark:bg-slate-800" />
+        <div className="h-3 w-3/4 rounded bg-slate-200 dark:bg-slate-800" />
       </div>
     </Card>
   )
@@ -122,16 +122,16 @@ export default function DatasetDashboard() {
       <AuthGate allowedRoles={AUTHORIZED_ROLES_FOR_MLOPS}>
         <div className="space-y-6">
           <div>
-            <div className="h-8 w-48 rounded bg-slate-800 animate-pulse" />
-            <div className="mt-1 h-4 w-64 rounded bg-slate-800 animate-pulse" />
+            <div className="h-8 w-48 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
+            <div className="mt-1 h-4 w-64 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
               <Card key={i} padding="sm" className="flex items-center gap-4 animate-pulse">
-                <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-800" />
+                <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-200 dark:bg-slate-800" />
                 <div className="space-y-2">
-                  <div className="h-5 w-12 rounded bg-slate-800" />
-                  <div className="h-3 w-16 rounded bg-slate-800" />
+                  <div className="h-5 w-12 rounded bg-slate-200 dark:bg-slate-800" />
+                  <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-800" />
                 </div>
               </Card>
             ))}
@@ -151,7 +151,7 @@ export default function DatasetDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Dataset Dashboard</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Dataset Dashboard</h1>
             <p className="mt-1 text-sm text-slate-500">
               Manage training and evaluation datasets for all modalities.
             </p>
@@ -185,7 +185,7 @@ export default function DatasetDashboard() {
                 className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${
                   filter === s
                     ? 'bg-cyan-400 text-slate-950'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 {s === 'all' ? 'All' : s.charAt(0).toUpperCase() + s.slice(1)}
@@ -198,8 +198,8 @@ export default function DatasetDashboard() {
         {datasets.length === 0 && (
           <Card className="text-center py-12">
             <Database className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">No datasets found</h3>
-            <p className="text-sm text-slate-400">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No datasets found</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               No dataset candidates have been registered yet.
             </p>
           </Card>
@@ -221,11 +221,11 @@ export default function DatasetDashboard() {
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
                       <Database className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-white">{ds.name}</h3>
+                      <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{ds.name}</h3>
                       <p className="text-xs text-slate-500">
                         {ds.totalSamples.toLocaleString()} samples — {ds.currentVersion}
                       </p>
@@ -240,7 +240,7 @@ export default function DatasetDashboard() {
                 </div>
 
                 {/* Description */}
-                <p className="mt-3 text-xs text-slate-400 line-clamp-2">{ds.description}</p>
+                <p className="mt-3 text-xs text-slate-500 dark:text-slate-400 line-clamp-2">{ds.description}</p>
 
                 {/* Modality distribution */}
                 {totalModalities > 0 && (
@@ -248,7 +248,7 @@ export default function DatasetDashboard() {
                     <p className="mb-2 text-[11px] text-slate-500 uppercase tracking-wider">
                       Modality Distribution
                     </p>
-                    <div className="flex h-2 overflow-hidden rounded-full bg-slate-800">
+                    <div className="flex h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
                       {Object.entries(ds.modalities).map(([mod, count]) => {
                         if (count === 0) return null
                         const pct = (count / totalModalities) * 100
@@ -281,14 +281,14 @@ export default function DatasetDashboard() {
 
                 {/* Quality */}
                 <div className="mt-4 grid grid-cols-3 gap-3">
-                  <div className="rounded-lg bg-slate-800/30 p-2 text-center">
-                    <p className="text-xs font-semibold text-white">
+                  <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-2 text-center">
+                    <p className="text-xs font-semibold text-slate-900 dark:text-white">
                       {(ds.quality.averageQualityScore * 100).toFixed(0)}%
                     </p>
                     <p className="text-[10px] text-slate-500">Quality</p>
                   </div>
-                  <div className="rounded-lg bg-slate-800/30 p-2 text-center">
-                    <p className="text-xs font-semibold text-white">
+                  <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-2 text-center">
+                    <p className="text-xs font-semibold text-slate-900 dark:text-white">
                       {ds.quality.totalSamples > 0
                         ? ((ds.quality.labeledSamples / ds.quality.totalSamples) * 100).toFixed(0)
                         : '0'}
@@ -296,8 +296,8 @@ export default function DatasetDashboard() {
                     </p>
                     <p className="text-[10px] text-slate-500">Labeled</p>
                   </div>
-                  <div className="rounded-lg bg-slate-800/30 p-2 text-center">
-                    <p className="text-xs font-semibold text-white">
+                  <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-2 text-center">
+                    <p className="text-xs font-semibold text-slate-900 dark:text-white">
                       {(ds.quality.duplicateRate * 100).toFixed(1)}%
                     </p>
                     <p className="text-[10px] text-slate-500">Duplicates</p>
@@ -322,7 +322,7 @@ export default function DatasetDashboard() {
                 )}
 
                 {/* Latest change */}
-                <div className="mt-4 flex items-center justify-between border-t border-slate-800/50 pt-3">
+                <div className="mt-4 flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800/50 pt-3">
                   <span className="text-xs text-slate-500">{ds.latestChange}</span>
                   <ArrowUpRight className="h-4 w-4 text-slate-600" />
                 </div>

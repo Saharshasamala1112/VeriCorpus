@@ -10,24 +10,53 @@ from app.schemas.model import ModelCreate
 
 class TestAuthSchemas:
     def test_register_valid(self):
-        r = RegisterRequest(phone="1234567890", username="test", password="password123")
-        assert r.phone == "1234567890"
+        r = RegisterRequest(
+            full_name="Test User",
+            email="test@example.com",
+            phone="12345678901",
+            country_code="IN",
+            password="password123",
+            confirm_password="password123",
+        )
+        assert r.phone == "12345678901"
+        assert r.full_name == "Test User"
 
     def test_register_short_phone(self):
         with pytest.raises(ValidationError):
-            RegisterRequest(phone="123", username="test", password="password123")
+            RegisterRequest(
+                full_name="Test User",
+                email="test@example.com",
+                phone="123",
+                country_code="IN",
+                password="password123",
+                confirm_password="password123",
+            )
 
     def test_register_short_password(self):
         with pytest.raises(ValidationError):
-            RegisterRequest(phone="1234567890", username="test", password="123")
+            RegisterRequest(
+                full_name="Test User",
+                email="test@example.com",
+                phone="12345678901",
+                country_code="IN",
+                password="123",
+                confirm_password="123",
+            )
 
-    def test_register_short_username(self):
+    def test_register_short_name(self):
         with pytest.raises(ValidationError):
-            RegisterRequest(phone="1234567890", username="a", password="password123")
+            RegisterRequest(
+                full_name="A",
+                email="test@example.com",
+                phone="12345678901",
+                country_code="IN",
+                password="password123",
+                confirm_password="password123",
+            )
 
     def test_login_valid(self):
-        r = LoginRequest(phone="1234567890", password="pass")
-        assert r.phone == "1234567890"
+        r = LoginRequest(identifier="test@example.com", password="pass")
+        assert r.identifier == "test@example.com"
 
 
 class TestAnalysisSchemas:

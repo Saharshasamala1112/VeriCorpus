@@ -189,7 +189,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Welcome */}
       <div>
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
         <p className="mt-1 text-sm text-slate-500">
           Analyze and verify content authenticity across media types.
         </p>
@@ -200,22 +200,22 @@ export default function DashboardPage() {
         {loading
           ? Array.from({ length: 4 }).map((_, i) => (
               <Card key={i} padding="sm" className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800/50">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50">
                   <Loader2 className="h-5 w-5 text-slate-500 animate-spin" />
                 </div>
                 <div className="space-y-2">
-                  <div className="h-5 w-16 rounded bg-slate-800/50" />
-                  <div className="h-3 w-24 rounded bg-slate-800/50" />
+                  <div className="h-5 w-16 rounded bg-slate-200/50 dark:bg-slate-800/50" />
+                  <div className="h-3 w-24 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                 </div>
               </Card>
             ))
           : overviewStats.map((stat) => (
               <Card key={stat.label} padding="sm" className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
                   <stat.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-white">{stat.value}</p>
+                  <p className="text-lg font-bold text-slate-900 dark:text-white">{stat.value}</p>
                   <p className="text-xs text-slate-500">{stat.label}</p>
                 </div>
               </Card>
@@ -225,7 +225,7 @@ export default function DashboardPage() {
       {/* Media Cards */}
       <div>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-white">Analyze Content</h2>
+          <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Analyze Content</h2>
           <button
             onClick={() => navigate(ROUTES.ANALYZE)}
             className="flex items-center gap-1 text-xs text-slate-500 transition hover:text-cyan-400"
@@ -241,26 +241,26 @@ export default function DashboardPage() {
               <button
                 key={type}
                 onClick={() => navigate(routeMap[type])}
-                className={`group flex flex-col rounded-2xl border border-slate-800/80 bg-slate-900/50 p-5 text-left transition-all duration-200 ${colors.border}`}
+                className={`group flex flex-col rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 p-5 text-left transition-all duration-200 ${colors.border}`}
               >
                 <div
-                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-800/50 transition-colors ${colors.hover}`}
+                  className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 transition-colors ${colors.hover}`}
                 >
                   <config.icon className={`h-6 w-6 ${colors.icon}`} />
                 </div>
-                <h3 className="text-sm font-semibold text-white">{config.label}</h3>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{config.label}</h3>
                 <p className="mt-1 line-clamp-2 text-xs text-slate-500">{config.description}</p>
                 <div className="mt-3 flex flex-wrap gap-1">
                   {config.acceptedFormats.slice(0, 3).map((fmt) => (
                     <span
                       key={fmt}
-                      className="rounded bg-slate-800/60 px-1.5 py-0.5 text-[10px] text-slate-500"
+                      className="rounded bg-slate-200/60 dark:bg-slate-800/60 px-1.5 py-0.5 text-[10px] text-slate-500"
                     >
                       {fmt}
                     </span>
                   ))}
                   {config.acceptedFormats.length > 3 && (
-                    <span className="rounded bg-slate-800/60 px-1.5 py-0.5 text-[10px] text-slate-500">
+                    <span className="rounded bg-slate-200/60 dark:bg-slate-800/60 px-1.5 py-0.5 text-[10px] text-slate-500">
                       +{config.acceptedFormats.length - 3}
                     </span>
                   )}
@@ -281,8 +281,8 @@ export default function DashboardPage() {
       <div className="grid gap-4 lg:grid-cols-3">
         {/* Recent Analyses */}
         <Card className="lg:col-span-2" padding="none">
-          <div className="flex items-center justify-between border-b border-slate-800/50 px-6 py-4">
-            <h2 className="text-sm font-semibold text-white">Recent Analyses</h2>
+          <div className="flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50 px-6 py-4">
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">Recent Analyses</h2>
             <button
               onClick={() => navigate(ROUTES.HISTORY)}
               className="text-xs text-slate-500 transition hover:text-cyan-400"
@@ -290,13 +290,13 @@ export default function DashboardPage() {
               View all
             </button>
           </div>
-          <div className="divide-y divide-slate-800/50">
+          <div className="divide-y divide-slate-200/50 dark:divide-slate-800/50">
             {loading ? (
               Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="flex items-center gap-4 px-6 py-3">
                   <div className="min-w-0 flex-1 space-y-2">
-                    <div className="h-4 w-48 rounded bg-slate-800/50" />
-                    <div className="h-3 w-20 rounded bg-slate-800/50" />
+                    <div className="h-4 w-48 rounded bg-slate-200/50 dark:bg-slate-800/50" />
+                    <div className="h-3 w-20 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                   </div>
                 </div>
               ))
@@ -304,11 +304,11 @@ export default function DashboardPage() {
               recentAnalyses.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center gap-4 px-6 py-3 transition hover:bg-slate-800/20 cursor-pointer"
+                  className="flex items-center gap-4 px-6 py-3 transition hover:bg-slate-100/20 dark:hover:bg-slate-800/20 cursor-pointer"
                   onClick={() => navigate(`/result/${item.id}`)}
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm text-white">{item.filename}</p>
+                    <p className="truncate text-sm text-slate-900 dark:text-white">{item.filename}</p>
                     <p className="text-xs text-slate-500">{formatTimestamp(item.timestamp)}</p>
                   </div>
                   <Badge variant="default" size="sm">
@@ -343,20 +343,20 @@ export default function DashboardPage() {
 
         {/* System Status */}
         <Card padding="none">
-          <div className="border-b border-slate-800/50 px-6 py-4">
-            <h2 className="text-sm font-semibold text-white">System Status</h2>
+          <div className="border-b border-slate-200/50 dark:border-slate-800/50 px-6 py-4">
+            <h2 className="text-sm font-semibold text-slate-900 dark:text-white">System Status</h2>
           </div>
-          <div className="space-y-0 divide-y divide-slate-800/50">
+          <div className="space-y-0 divide-y divide-slate-200/50 dark:divide-slate-800/50">
             {loading
               ? Array.from({ length: 4 }).map((_, i) => (
                   <div key={i} className="flex items-center justify-between px-6 py-3">
-                    <div className="h-4 w-24 rounded bg-slate-800/50" />
-                    <div className="h-5 w-16 rounded bg-slate-800/50" />
+                    <div className="h-4 w-24 rounded bg-slate-200/50 dark:bg-slate-800/50" />
+                    <div className="h-5 w-16 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                   </div>
                 ))
               : systemStatus.map((svc) => (
                   <div key={svc.name} className="flex items-center justify-between px-6 py-3">
-                    <span className="text-sm text-slate-300">{svc.name}</span>
+                    <span className="text-sm text-slate-600 dark:text-slate-300">{svc.name}</span>
                     <Badge
                       variant={
                         svc.status === 'online'

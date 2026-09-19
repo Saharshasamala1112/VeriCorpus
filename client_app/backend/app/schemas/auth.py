@@ -2,20 +2,22 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 
-from app.models.user import UserRole
+from app.models.user import AuthProvider, UserRole
 
 
 class RegisterRequest(BaseModel):
+    full_name: str = Field(..., min_length=2, max_length=100)
+    email: EmailStr
     phone: str = Field(..., min_length=10, max_length=15)
-    username: str = Field(..., min_length=2, max_length=100)
-    password: str = Field(..., min_length=6)
-    email: str | None = None
+    country_code: str = Field(..., min_length=2, max_length=2)
+    password: str = Field(..., min_length=8)
+    confirm_password: str = Field(..., min_length=8)
 
 
 class LoginRequest(BaseModel):
-    phone: str
+    identifier: str = Field(..., min_length=1)
     password: str
 
 
@@ -24,36 +26,68 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     user_id: str
     username: str
+    email: str
     phone: str
     roles: list[str]
+    auth_provider: str = "local"
 
 
 class UserResponse(BaseModel):
     id: str
+    full_name: str
+    email: str
     phone: str
-    username: str
-    email: str | None
+    country_code: str
     role: UserRole
     is_active: bool
+    auth_provider: str
     created_at: datetime
     last_login_at: datetime | None
     corpus_connected: bool = False
 
 
 class UserUpdateRequest(BaseModel):
-    username: str | None = None
-    email: str | None = None
+    full_name: str | None = None
+    email: EmailStr | None = None
+    phone: str | None = None
+    country_code: str | None = None
     role: UserRole | None = None
     is_active: bool | None = None
 
 
 class ChangePasswordRequest(BaseModel):
     current_password: str
-    new_password: str = Field(..., min_length=6)
+    new_password: str = Field(..., min_length=8)
 
 
-# Corpus Authentication Schemas
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    password: str = Field(..., min_length=8)
+    confirm_password: str = Field(..., min_length=8)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Corpus Authentication Schemas (Standalone Login)
+# ──────────────────────────────────────────────────────────────────────────────
+
+class CorpusStandaloneLoginRequest(BaseModel):
+    """Request for standalone Corpus login (no existing VeriCorpus session required)."""
+
+    phone: str = Field(..., min_length=10, max_length=15, description="Corpus phone number")
+    password: str = Field(..., min_length=1, description="Corpus password")
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Corpus Linking Schemas (Existing User Linking)
+# ──────────────────────────────────────────────────────────────────────────────
+
 class CorpusLoginRequest(BaseModel):
+    """Request for linking Corpus account to existing VeriCorpus user."""
+
     phone: str
     password: str
 

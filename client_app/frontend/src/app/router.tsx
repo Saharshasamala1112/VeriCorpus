@@ -1,11 +1,15 @@
-import { lazy, Suspense } from 'react'
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import { lazy, Suspense, useEffect } from 'react'
+import { createBrowserRouter, Navigate, RouterProvider, useNavigate } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { ROUTES } from '../config/routes'
 import { Skeleton } from '../components/ui'
+import { useAuthStore } from '../store/auth'
 
 const LoginPage = lazy(() => import('../pages/auth/LoginPage'))
+const RegisterPage = lazy(() => import('../pages/auth/RegisterPage'))
+const ForgotPasswordPage = lazy(() => import('../pages/auth/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('../pages/auth/ResetPasswordPage'))
 const DashboardPage = lazy(() => import('../pages/DashboardPage'))
 const AnalyzePage = lazy(() => import('../pages/analysis/AnalyzePage'))
 const AnalyzeMediaPage = lazy(() => import('../pages/analysis/AnalyzeMediaPage'))
@@ -43,15 +47,67 @@ function SuspenseWrapper({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<PageLoader />}>{children}</Suspense>
 }
 
+// Auth wrapper that redirects authenticated users away from auth pages
+function AuthOnlyWrapper({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuthStore()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(ROUTES.DASHBOARD, { replace: true })
+    }
+  }, [isAuthenticated, navigate])
+
+  if (isAuthenticated) {
+    return null
+  }
+
+  return <>{children}</>
+}
+
 const router = createBrowserRouter([
+  // Public auth routes - redirect authenticated users to dashboard
   {
     path: ROUTES.LOGIN,
     element: (
-      <SuspenseWrapper>
-        <LoginPage />
-      </SuspenseWrapper>
+      <AuthOnlyWrapper>
+        <SuspenseWrapper>
+          <LoginPage />
+        </SuspenseWrapper>
+      </AuthOnlyWrapper>
     ),
   },
+  {
+    path: ROUTES.REGISTER,
+    element: (
+      <AuthOnlyWrapper>
+        <SuspenseWrapper>
+          <RegisterPage />
+        </SuspenseWrapper>
+      </AuthOnlyWrapper>
+    ),
+  },
+  {
+    path: ROUTES.FORGOT_PASSWORD,
+    element: (
+      <AuthOnlyWrapper>
+        <SuspenseWrapper>
+          <ForgotPasswordPage />
+        </SuspenseWrapper>
+      </AuthOnlyWrapper>
+    ),
+  },
+  {
+    path: ROUTES.RESET_PASSWORD,
+    element: (
+      <AuthOnlyWrapper>
+        <SuspenseWrapper>
+          <ResetPasswordPage />
+        </SuspenseWrapper>
+      </AuthOnlyWrapper>
+    ),
+  },
+  // Protected routes
   {
     element: <ProtectedRoute />,
     children: [

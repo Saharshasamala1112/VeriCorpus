@@ -139,7 +139,7 @@ export default function HistoryPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Analysis History</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Analysis History</h1>
           <p className="mt-1 text-sm text-slate-500">
             Review past content analyses with stable IDs and status tracking.
           </p>
@@ -164,7 +164,7 @@ export default function HistoryPage() {
             <select
               value={mediaTypeFilter}
               onChange={(e) => setMediaTypeFilter(e.target.value as MediaType | 'all')}
-              className="h-10 appearance-none rounded-xl border border-slate-800 bg-slate-900/70 pl-3 pr-8 text-sm text-white transition-all focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
+              className="h-10 appearance-none rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 pl-3 pr-8 text-sm text-slate-900 dark:text-white transition-all focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
             >
               {MEDIA_TYPE_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -178,7 +178,7 @@ export default function HistoryPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as AnalysisStatus | 'all')}
-              className="h-10 appearance-none rounded-xl border border-slate-800 bg-slate-900/70 pl-3 pr-8 text-sm text-white transition-all focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
+              className="h-10 appearance-none rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 pl-3 pr-8 text-sm text-slate-900 dark:text-white transition-all focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
             >
               {STATUS_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -196,7 +196,7 @@ export default function HistoryPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-800/50 text-xs text-slate-500">
+              <tr className="border-b border-slate-200/50 dark:border-slate-800/50 text-xs text-slate-500">
                 <th className="px-6 py-3 font-medium">File</th>
                 <th className="px-6 py-3 font-medium">Type</th>
                 <th className="px-6 py-3 font-medium">AI Score</th>
@@ -207,33 +207,33 @@ export default function HistoryPage() {
                 <th className="px-6 py-3 font-medium">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/50">
+            <tbody className="divide-y divide-slate-200/50 dark:divide-slate-800/50">
               {loading
                 ? Array.from({ length: 5 }).map((_, i) => (
                     <tr key={i}>
                       <td className="px-6 py-3">
-                        <div className="h-4 w-32 rounded bg-slate-800/50" />
+                        <div className="h-4 w-32 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-5 w-16 rounded bg-slate-800/50" />
+                        <div className="h-5 w-16 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-4 w-12 rounded bg-slate-800/50" />
+                        <div className="h-4 w-12 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-4 w-24 rounded bg-slate-800/50" />
+                        <div className="h-4 w-24 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-4 w-16 rounded bg-slate-800/50" />
+                        <div className="h-4 w-16 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-4 w-20 rounded bg-slate-800/50" />
+                        <div className="h-4 w-20 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-5 w-20 rounded bg-slate-800/50" />
+                        <div className="h-5 w-20 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                       <td className="px-6 py-3">
-                        <div className="h-4 w-16 rounded bg-slate-800/50" />
+                        <div className="h-4 w-16 rounded bg-slate-200/50 dark:bg-slate-800/50" />
                       </td>
                     </tr>
                   ))
@@ -244,14 +244,14 @@ export default function HistoryPage() {
                     return (
                       <tr
                         key={item.id}
-                        className="transition hover:bg-slate-800/20 cursor-pointer"
+                        className="transition hover:bg-slate-100/20 dark:hover:bg-slate-800/20 cursor-pointer"
                         onClick={() => navigate(`/result/${item.id}`)}
                       >
                         <td className="px-6 py-3">
                           <div className="flex items-center gap-2">
                             <span className="font-mono text-[10px] text-slate-600">{item.id}</span>
                           </div>
-                          <p className="text-white font-medium">{item.filename}</p>
+                          <p className="text-slate-900 dark:text-white font-medium">{item.filename}</p>
                         </td>
                         <td className="px-6 py-3">
                           <Badge size="sm" className="capitalize">
@@ -266,7 +266,7 @@ export default function HistoryPage() {
                               >
                                 {(item.confidence * 100).toFixed(0)}%
                               </span>
-                              <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-800">
+                              <div className="h-1.5 w-16 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
                                 <div
                                   className={`h-full rounded-full ${
                                     item.confidence > 0.7
@@ -284,7 +284,7 @@ export default function HistoryPage() {
                           )}
                         </td>
                         <td className="px-6 py-3">
-                          <span className="text-xs text-slate-400">{item.assessment}</span>
+                          <span className="text-xs text-slate-500 dark:text-slate-400">{item.assessment}</span>
                         </td>
                         <td className="px-6 py-3 text-xs text-slate-500">
                           {formatBytes(item.sizeBytes)}
@@ -309,19 +309,19 @@ export default function HistoryPage() {
                           <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
                             <button
                               onClick={() => navigate(`/result/${item.id}`)}
-                              className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-800 hover:text-cyan-400"
+                              className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-cyan-400"
                               aria-label="View"
                             >
                               <Eye className="h-3.5 w-3.5" />
                             </button>
                             <button
-                              className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-800 hover:text-white"
+                              className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
                               aria-label="Download"
                             >
                               <Download className="h-3.5 w-3.5" />
                             </button>
                             <button
-                              className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-800 hover:text-red-400"
+                              className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-red-400"
                               aria-label="Delete"
                             >
                               <Trash2 className="h-3.5 w-3.5" />

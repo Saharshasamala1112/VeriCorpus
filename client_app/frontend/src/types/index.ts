@@ -1,12 +1,19 @@
 export interface User {
   user_id: string
   username: string
+  email: string
   phone: string
   roles: string[]
+  auth_provider: 'local' | 'corpus'
   corpus_connected?: boolean
 }
 
 export interface LoginRequest {
+  identifier: string
+  password: string
+}
+
+export interface CorpusLoginRequest {
   phone: string
   password: string
 }
@@ -32,8 +39,10 @@ export interface LoginResponse {
   token_type: string
   user_id: string
   username: string
+  email: string
   phone: string
   roles: string[]
+  auth_provider: 'local' | 'corpus'
 }
 
 export interface OTPSendResponse {
@@ -48,13 +57,16 @@ export interface TokenRefreshResponse {
 
 export interface UserProfile {
   id: string
+  full_name: string
+  email: string
   phone: string
-  name?: string
-  username?: string
-  email?: string
+  country_code: string
+  role: string
   is_active: boolean
-  roles?: string[]
-  last_login_at?: string
+  auth_provider: 'local' | 'corpus'
+  created_at: string
+  last_login_at: string | null
+  corpus_connected: boolean
 }
 
 export interface MatchedPassage {

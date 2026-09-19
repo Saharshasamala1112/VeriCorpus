@@ -23,7 +23,7 @@ function MetricComparison({
   const isBetter = higherIsBetter ? delta > 0 : delta < 0
 
   return (
-    <div className="rounded-lg border border-slate-800/50 bg-slate-950/50 p-4">
+    <div className="rounded-lg border border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950/50 p-4">
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs text-slate-500 uppercase tracking-wider">{label}</span>
         <span
@@ -107,21 +107,21 @@ export default function ModelComparison() {
       <AuthGate allowedRoles={AUTHORIZED_ROLES_FOR_MLOPS}>
         <div className="space-y-6 animate-pulse">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-slate-800" />
+            <div className="h-9 w-9 rounded-xl bg-slate-200 dark:bg-slate-800" />
             <div>
-              <div className="h-8 w-48 rounded bg-slate-800" />
-              <div className="mt-1 h-4 w-64 rounded bg-slate-800" />
+              <div className="h-8 w-48 rounded bg-slate-200 dark:bg-slate-800" />
+              <div className="mt-1 h-4 w-64 rounded bg-slate-200 dark:bg-slate-800" />
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {Array.from({ length: 3 }).map((_, i) => (
               <Card key={i} padding="sm" className="space-y-2">
-                <div className="h-3 w-20 rounded bg-slate-800" />
-                <div className="h-9 w-full rounded bg-slate-800" />
+                <div className="h-3 w-20 rounded bg-slate-200 dark:bg-slate-800" />
+                <div className="h-9 w-full rounded bg-slate-200 dark:bg-slate-800" />
               </Card>
             ))}
           </div>
-          <Card className="h-48 rounded-xl bg-slate-800/50" />
+          <Card className="h-48 rounded-xl bg-slate-200/50 dark:bg-slate-800/50" />
         </div>
       </AuthGate>
     )
@@ -143,12 +143,12 @@ export default function ModelComparison() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate('/ml/models')}
-              className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition hover:bg-slate-800 hover:text-white"
+               className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
             <div>
-              <h1 className="text-2xl font-bold text-white">Model Comparison</h1>
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Model Comparison</h1>
               <p className="mt-1 text-sm text-slate-500">
                 Compare production vs candidate model versions before promotion.
               </p>
@@ -213,9 +213,9 @@ export default function ModelComparison() {
                   <Badge variant="success" size="sm">
                     Production
                   </Badge>
-                  <h3 className="text-sm font-semibold text-white">{productionVersion.version}</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{productionVersion.version}</h3>
                 </div>
-                <div className="space-y-1 text-xs text-slate-400">
+                <div className="space-y-1 text-xs text-slate-500 dark:text-slate-400">
                   <p>Dataset: {productionVersion.datasetVersion}</p>
                   <p>Training: {productionVersion.trainingRunId}</p>
                   <p>Evaluated: {new Date(productionVersion.lastEvaluatedAt).toLocaleString()}</p>
@@ -226,9 +226,9 @@ export default function ModelComparison() {
                   <Badge variant="info" size="sm">
                     Candidate
                   </Badge>
-                  <h3 className="text-sm font-semibold text-white">{candidateVersion.version}</h3>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{candidateVersion.version}</h3>
                 </div>
-                <div className="space-y-1 text-xs text-slate-400">
+                <div className="space-y-1 text-xs text-slate-500 dark:text-slate-400">
                   <p>Dataset: {candidateVersion.datasetVersion}</p>
                   <p>Training: {candidateVersion.trainingRunId}</p>
                   <p>Evaluated: {new Date(candidateVersion.lastEvaluatedAt).toLocaleString()}</p>
@@ -238,7 +238,7 @@ export default function ModelComparison() {
 
             {/* Metric comparisons */}
             <Card>
-              <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-white">
+              <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
                 <BarChart3 className="h-4 w-4 text-cyan-400" />
                 Metric Comparison
               </h3>
@@ -285,27 +285,27 @@ export default function ModelComparison() {
 
             {/* Changelog */}
             <Card>
-              <h3 className="mb-3 text-sm font-semibold text-white">Changelog</h3>
+              <h3 className="mb-3 text-sm font-semibold text-slate-900 dark:text-white">Changelog</h3>
               <div className="space-y-3">
                 <div>
                   <p className="text-xs text-slate-500 mb-1">
                     Production ({productionVersion.version})
                   </p>
-                  <p className="text-sm text-slate-300">{productionVersion.changelog}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{productionVersion.changelog}</p>
                 </div>
                 <div>
                   <p className="text-xs text-slate-500 mb-1">
                     Candidate ({candidateVersion.version})
                   </p>
-                  <p className="text-sm text-slate-300">{candidateVersion.changelog}</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-300">{candidateVersion.changelog}</p>
                 </div>
               </div>
             </Card>
 
             {/* Promotion recommendation */}
             <Card className="border-cyan-500/20 bg-cyan-500/5">
-              <h3 className="mb-2 text-sm font-semibold text-white">Promotion Summary</h3>
-              <p className="text-xs text-slate-400 mb-4">
+              <h3 className="mb-2 text-sm font-semibold text-slate-900 dark:text-white">Promotion Summary</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
                 Review the metric differences above before promoting the candidate to production.
                 Promotion requires authorized roles and will be logged.
               </p>
@@ -317,8 +317,8 @@ export default function ModelComparison() {
         ) : (
           <Card className="text-center py-12">
             <BarChart3 className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">Select a model to compare</h3>
-            <p className="text-sm text-slate-400">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Select a model to compare</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               Choose a model and two versions to see a detailed comparison.
             </p>
           </Card>

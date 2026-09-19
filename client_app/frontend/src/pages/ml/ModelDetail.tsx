@@ -56,27 +56,27 @@ function SkeletonDetail() {
   return (
     <div className="space-y-6 animate-pulse">
       <div className="flex items-center gap-3">
-        <div className="h-9 w-9 rounded-xl bg-slate-800" />
+        <div className="h-9 w-9 rounded-xl bg-slate-200 dark:bg-slate-800" />
         <div>
-          <div className="h-6 w-48 rounded bg-slate-800" />
-          <div className="mt-1 h-4 w-32 rounded bg-slate-800" />
+          <div className="h-6 w-48 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="mt-1 h-4 w-32 rounded bg-slate-200 dark:bg-slate-800" />
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
           <Card key={i} padding="sm" className="space-y-2">
-            <div className="h-3 w-16 rounded bg-slate-800" />
-            <div className="h-5 w-24 rounded bg-slate-800" />
+            <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-800" />
+            <div className="h-5 w-24 rounded bg-slate-200 dark:bg-slate-800" />
           </Card>
         ))}
       </div>
       <Card className="space-y-4">
-        <div className="h-5 w-40 rounded bg-slate-800" />
+        <div className="h-5 w-40 rounded bg-slate-200 dark:bg-slate-800" />
         <div className="grid gap-4 sm:grid-cols-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="rounded-lg bg-slate-800/30 p-3 space-y-2">
-              <div className="h-3 w-12 rounded bg-slate-800" />
-              <div className="h-6 w-16 rounded bg-slate-800" />
+            <div key={i} className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-3 space-y-2">
+              <div className="h-3 w-12 rounded bg-slate-200 dark:bg-slate-800" />
+              <div className="h-6 w-16 rounded bg-slate-200 dark:bg-slate-800" />
             </div>
           ))}
         </div>
@@ -134,15 +134,15 @@ export default function ModelDetail() {
         <div className="space-y-6">
           <button
             onClick={() => navigate('/ml/models')}
-            className="flex items-center gap-2 text-sm text-slate-400 hover:text-white"
+            className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Models
           </button>
           <Card className="text-center py-12">
             <BrainCircuit className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-white">Model not found</h3>
-            <p className="mt-2 text-sm text-slate-400">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Model not found</h3>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
               The requested model could not be found or you may not have access.
             </p>
           </Card>
@@ -195,12 +195,12 @@ export default function ModelDetail() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate('/ml/models')}
-              className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition hover:bg-slate-800 hover:text-white"
+               className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
             <div>
-              <h1 className="text-xl font-bold text-white">{model.name}</h1>
+              <h1 className="text-xl font-bold text-slate-900 dark:text-white">{model.name}</h1>
               <p className="text-sm text-slate-500">
                 {model.task} — {model.modality}
               </p>
@@ -233,7 +233,7 @@ export default function ModelDetail() {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Card padding="sm">
                   <p className="text-[11px] text-slate-500 uppercase tracking-wider">Model</p>
-                  <p className="mt-1 text-sm font-semibold text-white">{model.name}</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">{model.name}</p>
                 </Card>
                 <Card padding="sm">
                   <p className="text-[11px] text-slate-500 uppercase tracking-wider">
@@ -245,13 +245,13 @@ export default function ModelDetail() {
                 </Card>
                 <Card padding="sm">
                   <p className="text-[11px] text-slate-500 uppercase tracking-wider">Dataset</p>
-                  <p className="mt-1 text-sm font-semibold text-white">{model.datasetName}</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">{model.datasetName}</p>
                 </Card>
                 <Card padding="sm">
                   <p className="text-[11px] text-slate-500 uppercase tracking-wider">
                     Last Updated
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-white">
+                  <p className="mt-1 text-sm font-semibold text-slate-900 dark:text-white">
                     {formatTimestamp(model.updatedAt)}
                   </p>
                 </Card>
@@ -260,35 +260,35 @@ export default function ModelDetail() {
               {/* Production version details */}
               {productionVersion && (
                 <Card>
-                  <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-white">
+                  <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
                     <CheckCircle className="h-4 w-4 text-emerald-400" />
                     Production Version: {productionVersion.version}
                   </h3>
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <div className="rounded-lg bg-slate-800/30 p-3">
+                    <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-3">
                       <p className="text-[11px] text-slate-500">Accuracy</p>
-                      <p className="text-lg font-bold text-white">
+                      <p className="text-lg font-bold text-slate-900 dark:text-white">
                         {(productionVersion.metrics.accuracy * 100).toFixed(1)}%
                       </p>
                     </div>
-                    <div className="rounded-lg bg-slate-800/30 p-3">
+                    <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-3">
                       <p className="text-[11px] text-slate-500">F1 Score</p>
-                      <p className="text-lg font-bold text-white">
+                      <p className="text-lg font-bold text-slate-900 dark:text-white">
                         {(productionVersion.metrics.f1Score * 100).toFixed(1)}%
                       </p>
                     </div>
-                    <div className="rounded-lg bg-slate-800/30 p-3">
+                    <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-3">
                       <p className="text-[11px] text-slate-500">AUC-ROC</p>
-                      <p className="text-lg font-bold text-white">
+                      <p className="text-lg font-bold text-slate-900 dark:text-white">
                         {productionVersion.metrics.aucRoc
                           ? (productionVersion.metrics.aucRoc * 100).toFixed(1)
                           : 'N/A'}
                         {productionVersion.metrics.aucRoc ? '%' : ''}
                       </p>
                     </div>
-                    <div className="rounded-lg bg-slate-800/30 p-3">
+                    <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-3">
                       <p className="text-[11px] text-slate-500">Loss</p>
-                      <p className="text-lg font-bold text-white">
+                      <p className="text-lg font-bold text-slate-900 dark:text-white">
                         {productionVersion.metrics.loss?.toFixed(3) ?? 'N/A'}
                       </p>
                     </div>
@@ -315,7 +315,7 @@ export default function ModelDetail() {
               {/* Candidate versions */}
               {stagingVersions.length > 0 && (
                 <Card className="border-cyan-500/20 bg-cyan-500/5">
-                  <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-white">
+                  <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900 dark:text-white">
                     <Beaker className="h-4 w-4 text-cyan-400" />
                     Candidate Versions
                   </h3>
@@ -323,7 +323,7 @@ export default function ModelDetail() {
                     {stagingVersions.map((version) => (
                       <div
                         key={version.id}
-                        className="rounded-lg border border-slate-800/50 bg-slate-950/50 p-4"
+                        className="rounded-lg border border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950/50 p-4"
                       >
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
@@ -350,28 +350,28 @@ export default function ModelDetail() {
                         <div className="grid grid-cols-4 gap-3 text-[11px]">
                           <div>
                             <span className="text-slate-500">Accuracy:</span>{' '}
-                            <span className="text-white">
+                            <span className="text-slate-900 dark:text-white">
                               {(version.metrics.accuracy * 100).toFixed(1)}%
                             </span>
                           </div>
                           <div>
                             <span className="text-slate-500">F1:</span>{' '}
-                            <span className="text-white">
+                            <span className="text-slate-900 dark:text-white">
                               {(version.metrics.f1Score * 100).toFixed(1)}%
                             </span>
                           </div>
                           <div>
                             <span className="text-slate-500">Dataset:</span>{' '}
-                            <span className="text-white">{version.datasetVersion}</span>
+                            <span className="text-slate-900 dark:text-white">{version.datasetVersion}</span>
                           </div>
                           <div>
                             <span className="text-slate-500">Evaluated:</span>{' '}
-                            <span className="text-white">
+                            <span className="text-slate-900 dark:text-white">
                               {formatTimestamp(version.lastEvaluatedAt)}
                             </span>
                           </div>
                         </div>
-                        <p className="mt-2 text-xs text-slate-400">{version.changelog}</p>
+                        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{version.changelog}</p>
                       </div>
                     ))}
                   </div>
@@ -383,7 +383,7 @@ export default function ModelDetail() {
           {/* Versions Tab */}
           <TabsContent id="versions">
             <Card padding="none">
-              <div className="divide-y divide-slate-800/50">
+              <div className="divide-y divide-slate-200/50 dark:divide-slate-800/50">
                 {model.versions.map((version) => {
                   const statusConfig = STATUS_CONFIG[version.status]
                   const StatusIcon = statusConfig.icon
@@ -392,19 +392,19 @@ export default function ModelDetail() {
                     <div key={version.id} className="px-6 py-4">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3">
-                          <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-700 bg-slate-800">
+                           <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 border-slate-300 dark:border-slate-700 bg-slate-200 dark:bg-slate-800">
                             <StatusIcon className="h-3 w-3" />
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <h3 className="text-sm font-semibold text-white">
+                               <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
                                 {version.version}
                               </h3>
                               <Badge variant={statusConfig.variant} size="sm">
                                 {statusConfig.label}
                               </Badge>
                             </div>
-                            <p className="mt-1 text-xs text-slate-400">{version.changelog}</p>
+                             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{version.changelog}</p>
                             <div className="mt-2 flex items-center gap-3 text-[11px] text-slate-500">
                               <span>Dataset: {version.datasetVersion}</span>
                               <span>Training: {version.trainingRunId}</span>
@@ -412,27 +412,27 @@ export default function ModelDetail() {
                               <span>Evaluated: {formatTimestamp(version.lastEvaluatedAt)}</span>
                             </div>
                             <div className="mt-2 grid grid-cols-4 gap-4 text-xs">
-                              <span className="text-slate-400">
-                                Accuracy:{' '}
-                                <span className="text-white">
-                                  {(version.metrics.accuracy * 100).toFixed(1)}%
-                                </span>
-                              </span>
-                              <span className="text-slate-400">
-                                Precision:{' '}
-                                <span className="text-white">
-                                  {(version.metrics.precision * 100).toFixed(1)}%
-                                </span>
-                              </span>
-                              <span className="text-slate-400">
-                                Recall:{' '}
-                                <span className="text-white">
-                                  {(version.metrics.recall * 100).toFixed(1)}%
-                                </span>
-                              </span>
-                              <span className="text-slate-400">
-                                F1:{' '}
-                                <span className="text-white">
+                               <span className="text-slate-500 dark:text-slate-400">
+                                 Accuracy:{' '}
+                                 <span className="text-slate-900 dark:text-white">
+                                   {(version.metrics.accuracy * 100).toFixed(1)}%
+                                 </span>
+                               </span>
+                               <span className="text-slate-500 dark:text-slate-400">
+                                 Precision:{' '}
+                                 <span className="text-slate-900 dark:text-white">
+                                   {(version.metrics.precision * 100).toFixed(1)}%
+                                 </span>
+                               </span>
+                               <span className="text-slate-500 dark:text-slate-400">
+                                 Recall:{' '}
+                                 <span className="text-slate-900 dark:text-white">
+                                   {(version.metrics.recall * 100).toFixed(1)}%
+                                 </span>
+                               </span>
+                               <span className="text-slate-500 dark:text-slate-400">
+                                 F1:{' '}
+                                 <span className="text-slate-900 dark:text-white">
                                   {(version.metrics.f1Score * 100).toFixed(1)}%
                                 </span>
                               </span>
@@ -477,8 +477,8 @@ export default function ModelDetail() {
           <TabsContent id="training">
             <Card className="text-center py-12">
               <History className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-white mb-2">Training History</h3>
-              <p className="text-sm text-slate-400 mb-4">View all training runs for this model.</p>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Training History</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">View all training runs for this model.</p>
               <Button variant="outline" onClick={() => navigate('/ml/training')}>
                 View Training Dashboard
               </Button>
@@ -496,30 +496,30 @@ export default function ModelDetail() {
             <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Shield className="h-4 w-4 text-amber-400" />
-                <span className="text-sm font-semibold text-white">Authorization Required</span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">Authorization Required</span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Only authorized roles (admin, ml_engineer) may promote models to production. This
                 action will be recorded in the audit log.
               </p>
             </div>
 
             {promoteVersion && (
-              <div className="rounded-lg bg-slate-800/30 p-4">
+              <div className="rounded-lg bg-slate-200/30 dark:bg-slate-800/30 p-4">
                 <p className="text-xs text-slate-500 mb-1">Promoting</p>
-                <p className="text-sm font-semibold text-white">
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">
                   {promoteVersion.version} → Production
                 </p>
                 <div className="mt-2 grid grid-cols-2 gap-2 text-[11px]">
-                  <span className="text-slate-400">
+                  <span className="text-slate-500 dark:text-slate-400">
                     Accuracy:{' '}
-                    <span className="text-white">
+                    <span className="text-slate-900 dark:text-white">
                       {(promoteVersion.metrics.accuracy * 100).toFixed(1)}%
                     </span>
                   </span>
-                  <span className="text-slate-400">
+                  <span className="text-slate-500 dark:text-slate-400">
                     F1:{' '}
-                    <span className="text-white">
+                    <span className="text-slate-900 dark:text-white">
                       {(promoteVersion.metrics.f1Score * 100).toFixed(1)}%
                     </span>
                   </span>
@@ -532,7 +532,7 @@ export default function ModelDetail() {
               <textarea
                 value={promotionReason}
                 onChange={(e) => setPromotionReason(e.target.value)}
-                className="w-full rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 px-3 py-2 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
                 placeholder="Describe why this version should be promoted..."
                 rows={3}
               />
@@ -559,9 +559,9 @@ export default function ModelDetail() {
             <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <AlertTriangle className="h-4 w-4 text-red-400" />
-                <span className="text-sm font-semibold text-white">Admin Only</span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white">Admin Only</span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Rollback requires admin authorization. This action will revert the production model
                 to a previous version and is recorded in the audit log.
               </p>
@@ -577,16 +577,16 @@ export default function ModelDetail() {
                     className={`w-full rounded-lg border p-3 text-left transition ${
                       rollbackToVersion?.id === version.id
                         ? 'border-cyan-500/50 bg-cyan-500/10'
-                        : 'border-slate-800 bg-slate-900/50 hover:border-slate-700'
+                        : 'border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-white">{version.version}</span>
+                      <span className="text-sm font-medium text-slate-900 dark:text-white">{version.version}</span>
                       <span className="text-[11px] text-slate-500">
                         {formatTimestamp(version.createdAt)}
                       </span>
                     </div>
-                    <div className="mt-1 text-[11px] text-slate-400">
+                    <div className="mt-1 text-[11px] text-slate-500 dark:text-slate-400">
                       Accuracy: {(version.metrics.accuracy * 100).toFixed(1)}% | F1:{' '}
                       {(version.metrics.f1Score * 100).toFixed(1)}%
                     </div>
@@ -600,7 +600,7 @@ export default function ModelDetail() {
               <textarea
                 value={rollbackReason}
                 onChange={(e) => setRollbackReason(e.target.value)}
-                className="w-full rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
+                className="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 px-3 py-2 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-400/40"
                 placeholder="Describe why this rollback is necessary..."
                 rows={3}
               />

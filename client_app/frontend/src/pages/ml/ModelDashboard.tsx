@@ -11,15 +11,15 @@ function SkeletonCard() {
   return (
     <Card className="animate-pulse space-y-4">
       <div className="flex items-center gap-3">
-        <div className="h-10 w-10 rounded-xl bg-slate-800" />
+        <div className="h-10 w-10 rounded-xl bg-slate-200 dark:bg-slate-800" />
         <div className="space-y-2">
-          <div className="h-4 w-32 rounded bg-slate-800" />
-          <div className="h-3 w-48 rounded bg-slate-800" />
+          <div className="h-4 w-32 rounded bg-slate-200 dark:bg-slate-800" />
+          <div className="h-3 w-48 rounded bg-slate-200 dark:bg-slate-800" />
         </div>
       </div>
       <div className="space-y-2">
-        <div className="h-3 w-full rounded bg-slate-800" />
-        <div className="h-3 w-3/4 rounded bg-slate-800" />
+        <div className="h-3 w-full rounded bg-slate-200 dark:bg-slate-800" />
+        <div className="h-3 w-3/4 rounded bg-slate-200 dark:bg-slate-800" />
       </div>
     </Card>
   )
@@ -60,16 +60,16 @@ export default function ModelDashboard() {
       <AuthGate allowedRoles={AUTHORIZED_ROLES_FOR_MLOPS}>
         <div className="space-y-6">
           <div>
-            <div className="h-8 w-48 rounded bg-slate-800 animate-pulse" />
-            <div className="mt-1 h-4 w-64 rounded bg-slate-800 animate-pulse" />
+            <div className="h-8 w-48 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
+            <div className="mt-1 h-4 w-64 rounded bg-slate-200 dark:bg-slate-800 animate-pulse" />
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
               <Card key={i} padding="sm" className="flex items-center gap-4 animate-pulse">
-                <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-800" />
+                <div className="h-10 w-10 shrink-0 rounded-xl bg-slate-200 dark:bg-slate-800" />
                 <div className="space-y-2">
-                  <div className="h-5 w-12 rounded bg-slate-800" />
-                  <div className="h-3 w-16 rounded bg-slate-800" />
+                  <div className="h-5 w-12 rounded bg-slate-200 dark:bg-slate-800" />
+                  <div className="h-3 w-16 rounded bg-slate-200 dark:bg-slate-800" />
                 </div>
               </Card>
             ))}
@@ -89,7 +89,7 @@ export default function ModelDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-white">Model Dashboard</h1>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Model Dashboard</h1>
             <p className="mt-1 text-sm text-slate-500">
               Monitor model versions, evaluations, and deployment status.
             </p>
@@ -109,11 +109,11 @@ export default function ModelDashboard() {
         {/* Stats */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card padding="sm" className="flex items-center gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
               <BrainCircuit className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{totalModels}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{totalModels}</p>
               <p className="text-xs text-slate-500">Total Models</p>
             </div>
           </Card>
@@ -122,7 +122,7 @@ export default function ModelDashboard() {
               <CheckCircle className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{productionModels}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{productionModels}</p>
               <p className="text-xs text-slate-500">In Production</p>
             </div>
           </Card>
@@ -131,7 +131,7 @@ export default function ModelDashboard() {
               <Beaker className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{candidateModels}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{candidateModels}</p>
               <p className="text-xs text-slate-500">Candidates</p>
             </div>
           </Card>
@@ -140,7 +140,7 @@ export default function ModelDashboard() {
               <BarChart3 className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-lg font-bold text-white">{totalVersions}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-white">{totalVersions}</p>
               <p className="text-xs text-slate-500">Total Versions</p>
             </div>
           </Card>
@@ -150,8 +150,8 @@ export default function ModelDashboard() {
         {models.length === 0 && (
           <Card className="text-center py-12">
             <BrainCircuit className="h-12 w-12 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-white mb-2">No models found</h3>
-            <p className="text-sm text-slate-400">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No models found</h3>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
               No models have been registered in the pipeline yet.
             </p>
           </Card>
@@ -177,11 +177,11 @@ export default function ModelDashboard() {
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800/50 text-slate-400">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
                       <BrainCircuit className="h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-sm font-semibold text-white">{model.name}</h3>
+                      <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{model.name}</h3>
                       <p className="text-xs text-slate-500">
                         {model.task} — {model.modality}
                       </p>
@@ -239,15 +239,15 @@ export default function ModelDashboard() {
                       </Badge>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-[11px]">
-                      <span className="text-slate-400">
+                      <span className="text-slate-500 dark:text-slate-400">
                         Accuracy:{' '}
-                        <span className="text-white">
+                        <span className="text-slate-900 dark:text-white">
                           {(candidateVersion.metrics.accuracy * 100).toFixed(1)}%
                         </span>
                       </span>
-                      <span className="text-slate-400">
+                      <span className="text-slate-500 dark:text-slate-400">
                         F1:{' '}
-                        <span className="text-white">
+                        <span className="text-slate-900 dark:text-white">
                           {(candidateVersion.metrics.f1Score * 100).toFixed(1)}%
                         </span>
                       </span>
@@ -256,7 +256,7 @@ export default function ModelDashboard() {
                 )}
 
                 {/* Footer */}
-                <div className="mt-4 flex items-center justify-between border-t border-slate-800/50 pt-3">
+                <div className="mt-4 flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800/50 pt-3">
                   <span className="text-xs text-slate-500">
                     {model.versions.length} versions — {model.datasetName}
                   </span>
