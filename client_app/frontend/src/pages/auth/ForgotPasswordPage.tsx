@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Shield, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
+import { Shield, CheckCircle, AlertCircle } from 'lucide-react'
 import { authService } from '../../services/auth.service'
 import { Button, Input } from '../../components/ui'
 import { ROUTES } from '../../config/routes'

@@ -44,7 +44,7 @@ export default function ResetPasswordPage() {
       setState('invalid')
       return
     }
-    formData.token = token
+    setFormData((prev) => ({ ...prev, token }))
     setState('ready')
   }, [token])
 
@@ -192,7 +192,7 @@ export default function ResetPasswordPage() {
               </button>
             </div>
 
-            <Button type="submit" loading={false} className="w-full">
+            <Button type="submit" loading={state === 'submitting'} className="w-full">
               {t.resetPassword.resetPassword}
             </Button>
           </form>

@@ -87,6 +87,7 @@ export default function RegisterPage() {
         email: response.email,
         phone: response.phone,
         roles: response.roles,
+        auth_provider: (response.auth_provider as 'local' | 'corpus') || 'local',
       })
       navigate(from, { replace: true })
     } catch (err: unknown) {

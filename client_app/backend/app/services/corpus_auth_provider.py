@@ -19,7 +19,6 @@ from typing import Any
 import httpx
 
 from app.core.config import settings
-from app.exceptions import CorpusAPIError
 from app.services.corpus_service import normalize_phone
 
 logger = logging.getLogger(__name__)
